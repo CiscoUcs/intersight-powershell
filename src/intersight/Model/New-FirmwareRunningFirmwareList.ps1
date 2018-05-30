@@ -1,0 +1,21 @@
+function New-FirmwareRunningFirmwareList {
+    [CmdletBinding()]
+    Param (
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int32]]
+        ${Count},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.FirmwareRunningFirmware[]]]
+        ${Results}
+    )
+
+    Process {
+        'Creating object: intersight.Model.FirmwareRunningFirmwareList' | Write-Verbose
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+
+        New-Object -TypeName intersight.Model.FirmwareRunningFirmwareList -ArgumentList @(
+            ${Count},
+            ${Results}
+        )
+    }
+}
