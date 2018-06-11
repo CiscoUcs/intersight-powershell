@@ -32,12 +32,13 @@ namespace intersight.Client
         const String pemp8footer = "-----END PRIVATE KEY-----";
         const String pemp8encheader = "-----BEGIN ENCRYPTED PRIVATE KEY-----";
         const String pemp8encfooter = "-----END ENCRYPTED PRIVATE KEY-----";
-        public IntersightApiClient(string _host, string private_key, string _api_key_id) : base()
+        public IntersightApiClient(string _host, string private_key, string _api_key_id) : base(_host)
         {
              host = _host;
              private_key_file = private_key;
              api_key_id = _api_key_id;
              digest_algorithm = "rsa-sha256";
+	     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
 
 
