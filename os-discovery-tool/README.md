@@ -1,1 +1,1 @@
-## **ODT (OS Discovery Toolset) scripts**
+## **ODT (OS Discovery Toolset)**
