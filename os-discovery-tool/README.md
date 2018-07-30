@@ -15,6 +15,7 @@
 	-a----        7/13/2018  10:01 AM            195 discovery_config_esx.json
 	-a----        7/17/2018   2:23 PM           2157 generateSecureCredentials.ps1
 	-a----        7/17/2018   6:29 PM          19789 getEsxOsInvToIntersight.ps1
+	-a----        7/17/2018  12:21 PM          10807 README.md
 
 ```
 ---
