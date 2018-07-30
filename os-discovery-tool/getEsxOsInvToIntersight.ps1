@@ -130,15 +130,15 @@ Function GetTAGPrefix {
 Function GetOSDetails{
     Param([object]$env, [object]$VMHost, [object]$esxcli)
     Write-Host "GetOSDetails: $VMHost"  
-	$updateTS = GetISO8601Time
+    $updateTS = GetISO8601Time
     $prefix = GetTAGPrefix
     $osInvCollection = New-Object System.Collections.ArrayList
     $osdetails = $esxcli.system.version.Get.Invoke()	
-	$osInv = New-Object System.Object
+    $osInv = New-Object System.Object
     $osInv | Add-Member -type NoteProperty -name Key -Value $prefix"os.updateTimestamp"
     $osInv | Add-Member -type NoteProperty -name Value -Value $updateTS
     $count = $osInvCollection.Add($osInv)
-	Clear-Variable -Name osInv
+    Clear-Variable -Name osInv
     $vendor, $osname = $osdetails.Product.Split(' ')
     $osInv = New-Object System.Object
     $osInv | Add-Member -type NoteProperty -name Key -Value $prefix"os.vendor"
@@ -149,8 +149,8 @@ Function GetOSDetails{
     $osInv | Add-Member -type NoteProperty -name Key -Value $prefix"os.name"
     $osInv | Add-Member -type NoteProperty -name Value -Value $osname
     $count = $osInvCollection.Add($osInv)
-	Clear-Variable -Name osInv
-	$osInv = New-Object System.Object
+    Clear-Variable -Name osInv
+    $osInv = New-Object System.Object
     $osInv | Add-Member -type NoteProperty -name Key -Value $prefix"os.arch"
     $osInv | Add-Member -type NoteProperty -name Value -Value "x86_64"
     $count = $osInvCollection.Add($osInv)
