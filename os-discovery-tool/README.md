@@ -5,9 +5,9 @@
 ---
 ## File list
 ```Powershell
- PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> dir
+ PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> dir
 
-    Directory: C:\<my-workspace>\intersight-powershell\os-discovery-tool
+    Directory: $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool
 
 
 	Mode                LastWriteTime         Length Name

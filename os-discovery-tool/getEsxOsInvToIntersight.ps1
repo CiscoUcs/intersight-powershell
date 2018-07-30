@@ -33,7 +33,7 @@ Param (
 $mypath = (Resolve-Path .)
 
 try {
-    Import-Module $env:USERPROFILE\Downloads\IntersightPowerShellSDK\src\intersight\intersight.psd1
+    Import-Module $env:USERPROFILE\Downloads\intersight-powershell\src\intersight\intersight.psd1
     & ${env:ProgramFiles(x86)}\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1 $true
 } catch [System.Exception] {
     Write-Host -ForeGroundColor Red "Dependent Librabries not installed. Please check that the Cisco Intersight Powershell SDK and VMware PowerCLI packages are installed, $_"
