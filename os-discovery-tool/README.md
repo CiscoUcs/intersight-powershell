@@ -36,7 +36,7 @@
   ### III. Setup configurations
   Edit discovery_config_esx.json to include details as described below. Refer to the comments for additional help. NOTE: comments are not supported in JSON; please don't leave comments in your configuration files)
   ```Powershell
-   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> cat ..\..\Documents\discovery_config_esx.json
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> cat ..\..\..\Documents\discovery_config_esx.json
 	{
 		"config": {
 				# vCenter hostname or IP address
@@ -92,10 +92,10 @@
 		https://github.com/CiscoUcs/intersight-powershell
 
 	REMARKS
-		To see the examples, type: "get-help C:\Users\foo\jet\powershell\generateSecureCredentials.ps1 -examples".
-		For more information, type: "get-help C:\Users\foo\jet\powershell\generateSecureCredentials.ps1 -detailed".
-		For technical information, type: "get-help C:\Users\foo\jet\powershell\generateSecureCredentials.ps1 -full".
-		For online help, type: "get-help C:\Users\foo\jet\powershell\generateSecureCredentials.ps1 -online"
+		To see the examples, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -examples".
+		For more information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -detailed".
+		For technical information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -full".
+		For online help, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -online"
   ```
   
   #### Example run of generateSecureCredentials
@@ -142,10 +142,10 @@
 		https://github.com/CiscoUcs/intersight-powershell
 
 	REMARKS
-		To see the examples, type: "get-help C:\Users\foo\jet\powershell\getEsxOsInvToIntersight.ps1 -examples".
-		For more information, type: "get-help C:\Users\foo\jet\powershell\getEsxOsInvToIntersight.ps1 -detailed".
-		For technical information, type: "get-help C:\Users\foo\jet\powershell\getEsxOsInvToIntersight.ps1 -full".
-		For online help, type: "get-help C:\Users\foo\jet\powershell\getEsxOsInvToIntersight.ps1 -online"
+		To see the examples, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -examples".
+		For more information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -detailed".
+		For technical information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -full".
+		For online help, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -online"
   ```
   #### Example run of getEsxOsInvToIntersight
   ```Powershell
