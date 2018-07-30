@@ -7,7 +7,7 @@
 ```Powershell
  PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> dir
 
-    Directory: ...intersight-powershell\os-discovery-tool
+    Directory: C:\<my-workspace>\intersight-powershell\os-discovery-tool
 
 
 	Mode                LastWriteTime         Length Name
