@@ -36,7 +36,7 @@
   ### III. Setup configurations
   Edit discovery_config_esx.json to include details as described below. Refer to the comments for additional help. NOTE: comments are not supported in JSON; please don't leave comments in your configuration files)
   ```Powershell
-   PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> cat ..\..\Documents\discovery_config_esx.json
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> cat ..\..\Documents\discovery_config_esx.json
 	{
 		"config": {
 				# vCenter hostname or IP address
@@ -62,10 +62,10 @@
   ### IV. Run toolset
   #### i. generateSecureCredentials.ps1
   ```Powershell
-   PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> get-help .\generateSecureCredentials.ps1
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> get-help .\generateSecureCredentials.ps1
 
 	NAME
-		C:\<my-workspace>\intersight-powershell\os-discovery-tool\generateSecureCredentials.ps1
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\generateSecureCredentials.ps1
 
 	SYNOPSIS
 		ODT stands for OS Discovery Toolset
@@ -73,7 +73,7 @@
 
 
 	SYNTAX
-		C:\<my-workspace>\intersight-powershell\os-discovery-tool\generateSecureCredentials.ps1 [-platform] <String> [<CommonParameters>]
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\generateSecureCredentials.ps1 [-platform] <String> [<CommonParameters>]
 
 
 	DESCRIPTION
@@ -100,7 +100,7 @@
   
   #### Example run of generateSecureCredentials
   ```Powershell
-   PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -platform esx
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -platform esx
 	Encrypt Cisco Intersight Private Credentials in Windows Powershell 4.0+
 	===========================================================================
 	Enter the Full Path of the Intersight Private Key File (.pem): C:\full\path\to\secret.pem
@@ -114,10 +114,10 @@
   ```
   #### ii. getEsxOsInvToIntersight.ps1
   ```Powershell		
-   PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> get-help .\getEsxOsInvToIntersight.ps1
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> get-help .\getEsxOsInvToIntersight.ps1
 
 	NAME   
-		C:\<my-workspace>\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1
 
 	SYNOPSIS
 		ODT stands for OS Discovery Toolset.
@@ -126,7 +126,7 @@
 
 
 	SYNTAX
-		...intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1 [-configfile] <String> [<CommonParameters>]
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1 [-configfile] <String> [<CommonParameters>]
 
 
 	DESCRIPTION
@@ -149,7 +149,7 @@
   ```
   #### Example run of getEsxOsInvToIntersight
   ```Powershell
-	PS C:\<my-workspace>\intersight-powershell\os-discovery-tool> .\getEsxOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_esx_qa.json
+	PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\getEsxOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_esx_qa.json
 			  Welcome to VMware PowerCLI!
 
 	Log in to a vCenter Server or ESX host:              Connect-VIServer
