@@ -23,8 +23,13 @@
 ---  
   ### I. Install dependent components  
   1. A Windows machine (Virtual/Physical) with access to servers on your on-prem network with **Windows Powershell 4.0+** (Should be available on most Windows OS flavors)
-  2. **Intersight Powershell SDK** (Clone this repository, as described below and follow build instructions from: https://github.com/CiscoUcs/intersight-powershell)
+  2. **Intersight Powershell SDK** (Clone this repository, as described below and follow build instructions from: https://github.com/CiscoUcs/intersight-powershell).
      We recommend using git for windows and the GitBash commandline downloadable from: https://git-scm.com/downloads
+	 ```Bash
+	 user@windows-host MINGW64 ~
+	 $ git clone https://github.com/CiscoUcs/intersight-powershell.git
+	 ```
+
   3. For vSphere install the **vSphere PowerCLI package** from:    
      https://my.vmware.com/web/vmware/details?downloadGroup=PCLI650R1&productId=614
   ---
