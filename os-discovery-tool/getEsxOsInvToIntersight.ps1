@@ -1,8 +1,8 @@
 <#
 
 .SYNOPSIS
-JET stands for Just Environment Tagging.
-This is a simple JET script to Discover ESX OS Inventory and TAG Servers managed by Cisco Intersight.
+ODT stands for OS Discovery Toolset.
+This is a simple ODT script to Discover ESX OS Inventory and TAG Servers managed by Cisco Intersight.
 It can be run via the Windows Task Scheduler to ensure regular refresh and is powered by Windows Powershell 4.0+
 
 .DESCRIPTION
@@ -447,10 +447,10 @@ Function ValidateEnv {
         exit
     }
 }
-
-# doDiscovery does JET Discovery for HCL
-Function DoJetDiscovery {
-    Write-Host -ForegroundColor Cyan "[INFO]: JET script for OS Discovery started..."
+ 
+# doDiscovery does ODT Discovery for HCL
+Function DoDiscovery {
+    Write-Host -ForegroundColor Cyan "[INFO]: ODT script for OS Discovery started..."
     $env = GetEnvironment
     ValidateEnv $env
     StartLogging $env
@@ -496,9 +496,9 @@ Function DoJetDiscovery {
         
         Write-Host -ForegroundColor Green "===================================================================================="
     }
-    WriteLog $env "[INFO]" "JET Discovery complete!"
+    WriteLog $env "[INFO]" "ODT Discovery complete!"
     StopLogging
 }
 
-# Startup the JET
-DoJetDiscovery
+# Startup the ODT
+DoDiscovery

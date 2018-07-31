@@ -1,8 +1,8 @@
 ﻿<#
 
 .SYNOPSIS
-JET stands for Just Environment Tagging
-This is a simple JET script to encrypt Cisco Intersight (TM) and vCenter credentials
+ODT stands for OS Discovery Toolset.
+This is a simple ODT script to encrypt Cisco Intersight (TM) and vCenter credentials
 It is powered by Powershell (TM) 4.0+
 
 .DESCRIPTION
@@ -10,7 +10,7 @@ This tool needs the following inputs:
 
 For the ESX platform:
 1. vCenter Credentials
-2. Location of encrypted Cisco Intersight (TM) Secret key
+2. Location of encrypted Cisco Intersight Secret key
 
 For the Windows platform:
 1. Powershell Session Credentials for Active Directory Lookups
