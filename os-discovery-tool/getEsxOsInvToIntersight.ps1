@@ -24,19 +24,27 @@ This script can be run via the Windows Task scheduler OR SCOM
 https://github.com/CiscoUcs/intersight-powershell
 
 #>
-
+[CmdletBinding()]
 Param (
-    [Parameter(Mandatory=$true)]
-    [string]$configfile
+    [Parameter(Mandatory=$true, HelpMessage="Enter the full path of the discovery file (.json)")]
+    [string]$ConfigFile
 )
 
 $mypath = (Resolve-Path .)
+$scriptPath = Split-Path -Path $MyInvocation.MyCommand.Path -Parent
 
 try {
-    Import-Module $env:USERPROFILE\Downloads\intersight-powershell\src\intersight\intersight.psd1
-    & ${env:ProgramFiles(x86)}\VMware\Infrastructure\PowerCLI\Scripts\Initialize-PowerCLIEnvironment.ps1 $true
+    $modulePath = Resolve-Path "$scriptPath\..\src\intersight\intersight.psd1"
+    Import-Module $modulePath -Verbose:$false
+} catch {
+    throw "Dependent Libraries not installed. Please check that the Cisco Intersight Powershell SDK package is installed, $_"
+    exit
+}
+
+try {
+    Import-Module VMware.VimAutomation.Core -Verbose:$false
 } catch [System.Exception] {
-    Write-Host -ForeGroundColor Red "Dependent Librabries not installed. Please check that the Cisco Intersight Powershell SDK and VMware PowerCLI packages are installed, $_"
+    throw "Dependent Libraries not installed. Please check that the VMware.PowerCLI module is installed, $_"
     exit
 }
 
@@ -68,7 +76,7 @@ Function WriteLog
 
 Function GetEnvironment
 {
-    Return (Get-Content -Raw -Path (Resolve-Path $configfile) | ConvertFrom-Json)   
+    Return (Get-Content -Raw -Path (Resolve-Path $ConfigFile) | ConvertFrom-Json)
 }
 
 Function StartLogging {
@@ -79,13 +87,13 @@ Function StartLogging {
 
 Function ConnectvCenter {
     Param([object]$env)
-    $vCenter_creds_file_path=$env:USERPROFILE+"\"+$env.config.vCenter_creds_file
+    $vCenter_creds_file_path=$env.config.vCenter_creds_file
     $vcenterCredentials = Import-Clixml -Path $vCenter_creds_file_path
     try {
         Connect-ViServer -Server $env.config.vCenter -Credential $vcenterCredentials
     } catch [System.Exception] {
-        Write-Host -ForeGroundColor Red "Could not connect to vCenter: " $env.config.vCenter "Aborting..."
-        WriteLog $env "INFO" "Could not connect to vCenter: "$env.config.vCenter", Aborting..."
+        Write-Error "Could not connect to vCenter: $($env.config.vCenter), aborting..."
+        WriteLog $env "INFO" "Could not connect to vCenter: $($env.config.vCenter), aborting..."
         StopLogging
         exit
     }
@@ -129,11 +137,11 @@ Function GetTAGPrefix {
 #Os Details
 Function GetOSDetails{
     Param([object]$env, [object]$VMHost, [object]$esxcli)
-    Write-Host "GetOSDetails: $VMHost"  
+    Write-Verbose "GetOSDetails: $VMHost"
     $updateTS = GetISO8601Time
     $prefix = GetTAGPrefix
     $osInvCollection = New-Object System.Collections.ArrayList
-    $osdetails = $esxcli.system.version.Get.Invoke()	
+    $osdetails = $esxcli.system.version.Get.Invoke()
     $osInv = New-Object System.Object
     $osInv | Add-Member -type NoteProperty -name Key -Value $prefix"os.updateTimestamp"
     $osInv | Add-Member -type NoteProperty -name Value -Value $updateTS
@@ -187,7 +195,7 @@ Function GetOSDetails{
 #Driver details
 Function GetDriverDetails {
     Param([object]$env, [object]$VMHost, [object]$esxcli)
-    Write-Host "GetDriverDetails: $VMHost"
+    Write-Verbose "GetDriverDetails: $VMHost"
     $prefix = GetTAGPrefix
     $osInvCollection = New-Object System.Collections.ArrayList
     $driverList = New-Object Collections.Generic.List[string]
@@ -262,17 +270,17 @@ Function GetDriverDetails {
 
 Function ProcessHostOsInventory {
     Param([object]$env, [object]$VMHost, [object]$esxcli)
-    
-    WriteLog $env "INFO" "[$VMHost]:Retrieving OS Inventory..."  
+
+    WriteLog $env "INFO" "[$VMHost]:Retrieving OS Inventory..."
     $osInvCollection = GetOSDetails $env $VMHost $esxcli
-    
+
     WriteLog $env "INFO" "[$VMHost]:Retrieving Device Driver Inventory..."
     $driverInvCollection = GetDriverDetails $env $VMHost $esxcli
-    
+
     $combinedCollection = New-Object System.Collections.ArrayList
     $combinedCollection += $osInvCollection
     $combinedCollection += $driverInvCollection
-    
+
     $osInvJson = ConvertTo-Json -Depth 2 @{ "Tags"=foreach ($item in $combinedCollection) {@{Key=$item.Key; Value=$item.Value}}}
 
     WriteLog $env "INFO" "Formulated Tags for OS and Driver Inventory: -->"
@@ -283,15 +291,15 @@ Function ProcessHostOsInventory {
 
 Function ConnectIntersight {
     Param([object]$env)
-    Write-Host "Connecting to Cisco Intersight URL with API Keys: "$env.config.intersight_url
-    WriteLog $env "INFO" "Connecting to Cisco Intersight(TM) URL with API Keys:"+$env.config.intersight_url
-    $secret_file_path = $env:USERPROFILE+"\"+$env.config.intersight_secret_file
+    Write-Verbose "Connecting to Cisco Intersight URL with API Keys: $($env.config.intersight_url)"
+    WriteLog $env "INFO" "Connecting to Cisco Intersight(TM) URL with API Keys: $($env.config.intersight_url)"
+    $secret_file_path = $env.config.intersight_secret_file
     WriteLog $env "INFO" $secret_file_path
     WriteLog $env "INFO" $env.config.intersight_api_key
     try {
         New-IntersightApiClient $env.config.intersight_url $secret_file_path $env.config.intersight_api_key
     } catch [System.Exception] {
-        Write-Host -ForegroundColor Red "Connection to Cisco Intersight(TM) failed, Aborting..."
+        Write-Error "Connection to Cisco Intersight(TM) failed, Aborting..."
         WriteLog $env "ERROR" "Connection to Cisco Intersight(TM) failed, Aborting..."
         StopLogging
         exit
@@ -299,7 +307,7 @@ Function ConnectIntersight {
 }
 
 Function LookupIntersightServerBySerial {
-    Param([string]$server_serial, [string]$computeType) 
+    Param([string]$server_serial, [string]$computeType)
     $obj = $null
     try {
         if($computeType -eq "blade") {
@@ -312,15 +320,15 @@ Function LookupIntersightServerBySerial {
             }
             else
             {
-                Write-Host "Unknown Host: $server_serial, skipping..."
+                Write-Warning "Unknown Host: $server_serial, skipping..."
             }
         }
     } catch [System.Exception]{
-        Write-Host -ForegroundColor Red "API GET failed for host $server_serial, $_"
+        Write-Warning "API GET failed for host $server_serial, $_"
         WriteLog $env "ERROR" "API GET failed for host $server_serial, $_"
     }
     if($obj) {
-        Write-Host "Intersight API GET succeeded for host $server_serial"
+        Write-Verbose "Intersight API GET succeeded for host $server_serial"
     }
     Return $obj
 }
@@ -329,9 +337,9 @@ Function LookupIntersightServerBySerial {
 Function DiffServerTAGs {
     Param ([object]$oldTAGs, [object]$newTAGS)
     $changed = $false
-    Write-Host "Computing changes..."
+    Write-Verbose "Computing changes..."
     $oldIntersightTags = $oldTags | where-object {$_.Key -like "intersight.server.os.*"}
-    $newIntersightTags = $newTags | where-object {$_.Key -like "intersight.server.os.*"}  
+    $newIntersightTags = $newTags | where-object {$_.Key -like "intersight.server.os.*"}
     if(($newIntersightTags | measure-object).Count -ne ($oldIntersightTags | measure-object).Count) {
         $changed = $true
     }
@@ -356,7 +364,7 @@ Function PatchIntersightServerBySerial {
     WriteLog $env "INFO" "Sending OS and Driver Inventory..."
 
     $list =  New-Object "System.Collections.Generic.List[intersight.Model.MoTag]"
-	 
+
     #4. Create list from TAGs preserving non-JET TAGs
     $tags = $Server.Results[0].Tags
     $changed = DiffServerTAGs $tags $osInvCollection
@@ -372,37 +380,37 @@ Function PatchIntersightServerBySerial {
         foreach ($item in $osInvCollection) {
             $mo = New-MoTag -Key $item.Key -Value $item.Value
             $list.Add($mo)
-        } 
-	    
+        }
+
         #5. Prep API object for PATCH
         try {
-            #6. Call patch API 
-            Write-Host -ForegroundColor Magenta "Changes detected for Server: [$server_serial], PATCHing to Intersight..."
+            #6. Call patch API
+            Write-Verbose "Changes detected for Server: [$server_serial], PATCHing to Intersight..."
 	        if($computeType -eq "blade") {
-                $compute = New-ComputeBlade 
+                $compute = New-ComputeBlade
                 $compute.Tags = $list
                 Invoke-ComputeBladeApiComputeBladesMoidPatch $Server.Results[0].Moid $compute
             }
             else
             {
                 if($computeType -eq "rack") {
-                    $compute = New-ComputeRackUnit 
+                    $compute = New-ComputeRackUnit
                     $compute.Tags = $list
                     Invoke-ComputeRackUnitApiComputeRackUnitsMoidPatch $Server.Results[0].Moid $compute
                 }
                 else
                 {
-                    Write-Host "Unknown Host: $server_serial, skipping..."
+                    Write-Warning "Unknown Host: $server_serial, skipping..."
                 }
             }
         } catch [System.Exception]{
             WriteLog $env "ERROR" "API PATCH failed for host $server_serial, $_"
-            Write-Host -ForegroundColor Red "ERROR: API PATCH failed for host $server_serial, $_"
+            Write-Error "ERROR: API PATCH failed for host $server_serial, $_"
         }
     }
     else
     {
-        Write-Host -ForegroundColor Yellow "No changes detected for Server: [$server_serial], skipping..." 
+        Write-Verbose "No changes detected for Server: [$server_serial], skipping..."
         WriteLog $env "INFO" "No changes detected for Server: [$server_serial], skipping..."
     }
 }
@@ -415,42 +423,42 @@ Function ValidateEnv {
     Param ([object] $env)
     try {
         if(!(Test-Connection $env.config.vCenter -Quiet)) {
-            Write-Host -ForegroundColor Red "[ERROR]: vCenter not reachable (please use a valid hostname or IP address that's reachable)! Cannot Proceed..."
+            throw "[ERROR]: vCenter not reachable (please use a valid hostname or IP address that's reachable)! Cannot Proceed..."
             exit
         }
 
         if($env.config.location_filter -eq "" -or $env.config.location_filter -eq $null) {
-            Write-Host -ForegroundColor Red "[ERROR]: Filter cannot be empty (try *)! Cannot Proceed..."
+            throw "[ERROR]: Filter cannot be empty (try *)! Cannot Proceed..."
             exit
         }
 
         if($env.config.intersight_url -eq "" -or $env.config.intersight_url -eq $null) {
-            Write-Host -ForegroundColor Red "[ERROR]: Intersight URL cannot be empty (try https://intersight.com/api/v1)! Cannot Proceed..."
-            exit
-        }
-    
-        if($env.config.intersight_api_key -eq "" -or $env.config.intersight_api_key -eq $null) {
-            Write-Host -ForegroundColor Red "[ERROR]: Intersight API key cannot be empty! Cannot Proceed..."
+            throw "[ERROR]: Intersight URL cannot be empty (try https://intersight.com/api/v1)! Cannot Proceed..."
             exit
         }
 
-        $vCenter_creds_file_path=$env:USERPROFILE+"\"+$env.config.vCenter_creds_file
-        $secret_file_path = $env:USERPROFILE+"\"+$env.config.intersight_secret_file
-        if(!(Test-Path -PathType Leaf $vCenter_creds_file_path) -or !(Test-Path -PathType Leaf $secret_file_path) -or !(Test-Path -PathType Container $env.config.logfile_path)) {
-            Write-Host -ForegroundColor Red "[ERROR]: vCenter_creds_file, intersight_secret_file, and logfile_path must exist! Cannot Proceed..."
+        if($env.config.intersight_api_key -eq "" -or $env.config.intersight_api_key -eq $null) {
+            throw "[ERROR]: Intersight API key cannot be empty! Cannot Proceed..."
             exit
         }
-        Write-Host -ForegroundColor Green "[INFO]: Configurations in {$configfile}, validation succeeded!"
+
+        $vCenter_creds_file_path=$env.config.vCenter_creds_file
+        $secret_file_path = $env.config.intersight_secret_file
+        if(!(Test-Path -PathType Leaf $vCenter_creds_file_path) -or !(Test-Path -PathType Leaf $secret_file_path) -or !(Test-Path -PathType Container $env.config.logfile_path)) {
+            throw "[ERROR]: vCenter_creds_file, intersight_secret_file, and logfile_path must exist! Cannot Proceed..."
+            exit
+        }
+        Write-Verbose "[INFO]: Configurations in {$configfile}, validation succeeded!"
     }
     catch [System.Exception] {
-        Write-Host -ForegroundColor Red "[ERROR]: Discovery config validation failed, please ensure credential files and log files exist: $_"
+        throw "[ERROR]: Discovery config validation failed, please ensure credential files and log files exist: $_"
         exit
     }
 }
- 
+
 # doDiscovery does ODT Discovery for HCL
 Function DoDiscovery {
-    Write-Host -ForegroundColor Cyan "[INFO]: ODT script for OS Discovery started..."
+    Write-Verbose "[INFO]: ODT script for OS Discovery started..."
     $env = GetEnvironment
     ValidateEnv $env
     StartLogging $env
@@ -460,17 +468,17 @@ Function DoDiscovery {
     $VMHosts = GetVMHosts $env
     foreach ($VMHost in $VMHosts) {
         WriteLog $env "INFO" "[$VMHost]: Retrieving OS Inventory..."
-        Write-Host -ForegroundColor Cyan "------------------------------------------------------------------------------------"   
-        Write-Host -ForegroundColor Cyan "Processing {$VMHost}"
+        Write-Verbose "------------------------------------------------------------------------------------"
+        Write-Verbose "Processing {$VMHost}"
         try {
             $esxcli = ($VMHost | Get-EsxCli -V2)
         }
         catch {
-            Write-Host -ForegroundColor Red "[ERROR]: Server Unreachable {$VMHost), $_"
+            Write-Error "[ERROR]: Server Unreachable {$VMHost), $_"
             continue
         }
         $server_serial = GetVMHostSerial $esxcli
-        
+
         $computeType = GetComputeType $esxcli
         $obj = LookupIntersightServerBySerial $server_serial $computeType
         if($obj) {
@@ -478,23 +486,23 @@ Function DoDiscovery {
             {
                 $osInvCollection = ProcessHostOsInventory $env $VMHost $esxcli
                 $ServerMoid = $obj.Results[0].Moid
-                Write-Host "Server MOID: " $ServerMoid
+                Write-Verbose "Server MOID: $ServerMoid"
                 PatchIntersightServerBySerial $env $server_serial $computeType $obj $osInvCollection
-                Write-Host -ForegroundColor Green "Processing {$VMHost} :"$server_serial" complete."
+                Write-Verbose "Processing {$VMHost}: $server_serial complete."
             }
             else
             {
-                Write-Host -ForegroundColor Yellow "No results for {$VMHost}:$sever_serial from intersight, skipping..."
-                WriteLog $env "WARNING" "No results for {$VMHost}:$sever_serial from intersight"
+                Write-Warning "No results for {$VMHost}:$server_serial from intersight, skipping..."
+                WriteLog $env "WARNING" "No results for {$VMHost}:$server_serial from intersight"
             }
         }
         else
         {
-            Write-Host -ForegroundColor Yellow "No results for {$VMHost}:$sever_serial from intersight, skipping..."
+            Write-Warning "No results for {$VMHost}:$sever_serial from intersight, skipping..."
             WriteLog $env "WARNING" "No results for {$VMHost}:$sever_serial from intersight"
         }
-        
-        Write-Host -ForegroundColor Green "===================================================================================="
+
+        Write-Verbose "===================================================================================="
     }
     WriteLog $env "[INFO]" "ODT Discovery complete!"
     StopLogging
