@@ -16,8 +16,8 @@ For the Windows platform:
 2. Location of encrypted Cisco Intersight Secret key
 
 .EXAMPLE
->.\generateSecureCredentials.ps1 -platform ESX
->.\generateSecureCredentials.ps1 -platform Windows
+>.\generateSecureCredentials.ps1 -Platform ESX -ConfigFile $env:USERPROFILE\Documents\discovery_config_esx.json -Credential (Get-Credential)
+>.\generateSecureCredentials.ps1 -Platform Windows -ConfigFile $env:USERPROFILE\Documents\discovery_config_esx.json
 
 .NOTES
 This script can be run only on a Windows Powershell platform
@@ -26,42 +26,60 @@ This script can be run only on a Windows Powershell platform
 https://github.com/CiscoUcs/intersight-powershell
 
 #>
-
+[CmdletBinding()]
 Param (
-    [Parameter(Mandatory=$true)]
-    [string]$platform
+    [Parameter(Mandatory=$true, HelpMessage="Enter platform: ESX or Windows")]
+    [ValidateSet("ESX","Windows")]
+    [string]$Platform,
+
+    [Parameter(Mandatory=$true, HelpMessage="Enter the full path of the discovery file (.json)")]
+    [ValidateScript({
+        if (Test-Path -Path $_) {
+            $true
+        } else {
+            throw [System.Management.Automation.PSArgumentException]"Config file at path $_ does not exist, cannot proceed!"
+            $false
+        }
+    })]
+    [string]$ConfigFile,
+
+    [Parameter(Mandatory=$true, HelpMessage="Please enter credentials")]
+    [System.Management.Automation.PSCredential]$Credential
 )
 
-Write-Host -ForegroundColor Cyan "Encrypt Cisco Intersight Private Credentials in Windows Powershell 4.0+"
-Write-Host -ForegroundColor Cyan "==========================================================================="
-#Get User Private key location
+$efsService = Get-Service -Name EFS
+if ($efsService.Status -ne "Running") {
+    Write-Warning "[WARNING] Encrypting File System (EFS) is not running!  PEM and Credentials will not be encrypted on disk!"
+}
 
 try {
-    $PEMPath = Read-Host "Enter the Full Path of the Cisco Intersight Private Key File (.pem)" 
-
-    if(Test-Path $PEMPath) {
-        #Encrypt it
-        (Get-Item -Path $PEMPath).Encrypt()
-    }
-    else
-    {
-        Write-Warning "File at path $PEMPath does not exist, cannot proceed!"
-        exit
-    }
-
-    #Get vCenter Credentials
-    if($platform -eq "esx") {
-        Write-Host -ForegroundColor Yellow "Please enter vCenter Credentials: "
-        Get-Credential | Export-Clixml -Path $env:USERPROFILE\Documents\vCenter-creds.xml
-        (Get-Item -Path $env:USERPROFILE\Documents\vCenter-creds.xml).Encrypt()
-    }
-    elseif($platform -eq "windows") {
-        Write-Host -ForegroundColor Yellow "[Warning]: Your Windows Session credentials will be used for Active Directory lookups, make sure you have atleast read-only access."
-    }
-}
-catch [System.Exception] {
-    Write-Host -ForegroundColor Red "[ERROR]: Credential generation failed: $_"
+    $env = (Get-Content -Raw -Path (Resolve-Path $ConfigFile) | ConvertFrom-Json)
+} catch {
+    throw "[ERROR] Failed to retrieve discovery settings: $_"
     exit
 }
-Write-Host -ForegroundColor Green "Credentials generated and encrypted!"
-Write-Host -ForegroundColor Green "____________________________________"
+
+try {
+    #Encrypt the PEM file
+    (Get-Item -Path $env.config.intersight_secret_file).Encrypt()
+}
+catch [System.Exception] {
+    Write-Warning "[WARNING] Failed to encrypt PEM file on disk: $_"
+}
+
+#Get vCenter Credentials
+if($platform -eq "ESX") {
+    $Credential | Export-Clixml -Path $env.config.vCenter_creds_file
+    try {
+        #Encrypt the credential file
+        (Get-Item -Path $env.config.vCenter_creds_file).Encrypt()
+    }
+    catch [System.Exception] {
+        Write-Warning "[WARNING] Failed to encrypt credential file on disk: $_"
+    }
+}
+elseif($platform -eq "Windows") {
+    Write-Warning "[WARNING] Your Windows Session credentials will be used for Active Directory lookups, make sure you have at least read-only access."
+}
+Write-Verbose "Credentials generated!"
+Write-Verbose "____________________________________"
