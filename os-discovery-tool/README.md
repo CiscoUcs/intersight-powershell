@@ -20,8 +20,8 @@
 ```
 ---
 ## Setup Steps
----  
-  ### I. Install dependent components  
+---
+  ### I. Install dependent components
   1. A Windows machine (Virtual/Physical) with access to servers on your on-prem network. Check that **Windows Powershell 4.0+** is installed (Should be available on most Windows OS flavors)
   2. **Intersight Powershell SDK** (Clone this repository, as described below and follow build instructions from: https://github.com/CiscoUcs/intersight-powershell).
      We recommend using git for windows and the GitBash commandline downloadable from: https://git-scm.com/downloads
@@ -30,10 +30,10 @@
 	 $ git clone https://github.com/CiscoUcs/intersight-powershell.git
 	 ```
 
-  3. For vSphere install the **vSphere PowerCLI package** from:    
+  3. For vSphere install the **vSphere PowerCLI package** from:
      https://my.vmware.com/web/vmware/details?downloadGroup=PCLI650R1&productId=614
   ---
- 
+
   ### II. Ensure prerequisites
   1. This toolset requires that the **server OS is managed** i.e., managed by a vCenter in case of ESX.
   2. **Claim your servers.** Ensure that the server is claimed in Cisco Intersight. This toolset will validate only claimed servers by serial numbers and their connectivity to Intersight.
@@ -47,7 +47,7 @@
 		"config": {
 				# vCenter hostname or IP address
 				"vCenter": "myvcenter.example.com",
-				# location of PSCredential file containing vCenter credentials. 
+				# location of PSCredential file containing vCenter credentials.
 				# Notice that this is a relative path from the user's profile
 				"vCenter_creds_file": "Documents\\vCenter-creds.xml",
 				# Location filter for vCenter location in the hierarchy
@@ -56,7 +56,7 @@
 				"intersight_url": "https://intersight.com/api/v1",
 				# Public API key for intersight API
 				"intersight_api_key": "5b4cff386d3376393452476f/5b4cfead6d33763934524747/5b4d0c156d33763934525341",
-				# Location of intersight Secret API key file on local filesystem. 
+				# Location of intersight Secret API key file on local filesystem.
 				# Notice that this is a relative path from the user's profile.
 				"intersight_secret_file": "Downloads\\secret.pem",
 				# Location of log file. Notice that this is an absolute path.
@@ -103,10 +103,10 @@
 		For technical information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -full".
 		For online help, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\generateSecureCredentials.ps1 -online"
   ```
-  
+
   #### Example run of generateSecureCredentials
   ```Powershell
-   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -platform esx
+   PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -Platform esx -ConfigFile -ConfigFile $env:USERPROFILE\Documents\discovery_config_esx.json
 	Encrypt Cisco Intersight Private Credentials in Windows Powershell 4.0+
 	===========================================================================
 	Enter the Full Path of the Intersight Private Key File (.pem): C:\full\path\to\secret.pem
@@ -119,10 +119,10 @@
 	____________________________________
   ```
   #### ii. getEsxOsInvToIntersight.ps1
-  ```Powershell		
+  ```Powershell
    PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> get-help .\getEsxOsInvToIntersight.ps1
 
-	NAME   
+	NAME
 		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1
 
 	SYNOPSIS
@@ -155,97 +155,57 @@
   ```
   #### Example run of getEsxOsInvToIntersight
   ```Powershell
-	PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\getEsxOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_esx_qa.json
-			  Welcome to VMware PowerCLI!
-
-	Log in to a vCenter Server or ESX host:              Connect-VIServer
-	To find out what commands are available, type:       Get-VICommand
-	To show searchable help for all PowerCLI commands:   Get-PowerCLIHelp
-	Once you have connected, display all virtual machines: Get-VM
-	If you need more help, visit the PowerCLI community: Get-PowerCLICommunity
-
-		   Copyright (C) VMware, Inc. All rights reserved.
-
+	PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\getEsxOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_esx.json -Verbose
 
 	[INFO]: JET script for OS Discovery started...
-	[INFO]: Configurations in {$env:USERPROFILE\Documents\discovery_config_esx_qa.json}, validation succeeded!
+	[INFO]: Configurations in {$env:USERPROFILE\Documents\discovery_config_esx.json}, validation succeeded!
 	Transcript started, output file is C:\ProgramData\Cisco\SystemDiscovery\discovery_131768894634013608.out
-	WARNING: There were one or more problems with the server certificate for the server myvcenter.example.com:443:
-
-	* The X509 chain could not be built up to the root certificate.
-
-	Certificate: [Subject]
-	  C=US, CN=myvcenter.example.com
-
-	[Issuer]
-	  O=MYVCENTER, C=US, DC=local, DC=vsphere, CN=CA
-
-	[Serial Number]
-	  00DA7416FA1A22644E
-
-	[Not Before]
-	  2/2/2016 6:05:02 PM
-
-	[Not After]
-	  1/27/2026 6:04:41 PM
-
-	[Thumbprint]
-	  3F999517C097C76607C6CB382F8E4A778C3087C3
-
-
-
-	The server certificate is not valid.
-
-	WARNING: THE DEFAULT BEHAVIOR UPON INVALID SERVER CERTIFICATE WILL CHANGE IN A FUTURE RELEASE. To ensure scripts are not affected by the change, use Set-PowerCLIConfiguration to set a value for the
-	InvalidCertificateAction option.
-
 
 	Name                           Port  User
 	----                           ----  ----
-	myvcenter.example.com 443   VSPHERE.LOCAL\Administrator
-	Connecting to Cisco Intersight URL with API Keys:  https://intersight.com/api/v1
-	------------------------------------------------------------------------------------
-	Processing {my-esx-1.example.com} :
-	Intersight API GET succeeded for host FCH16277YXW
-	GetOSDetails: my-esx-1.example.com
-	GetDriverDetails: my-esx-1.example.com
-	Server MOID:  5b56cd3a366c6b3976923be4
-	Computing changes...
-	Changes detected for Server: [FCH16277YXW], PATCHing to Intersight...
-	Processing {my-esx-1.example.com} : FCH16277YXW complete.
-	====================================================================================
-	------------------------------------------------------------------------------------
-	Processing {my-esx-2.example.com} : FCH16277YXW
-	Intersight API GET succeeded for host FCH17247F8E
-	GetOSDetails: my-esx-2.example.com
-	GetDriverDetails: my-esx-2.example.com
-	Server MOID:  5b56cd3a366c6b3976923be7
-	Computing changes...
-	Changes detected for Server: [FCH16277YXW], PATCHing to Intersight...
-	Processing {my-esx-2.example.com} : FCH17247F8E complete.
-	====================================================================================
-	------------------------------------------------------------------------------------
-	Processing {my-esx-3.example.com} : FCH17247F8E
-	Intersight API GET succeeded for host FLM2042P049
-	GetOSDetails: my-esx-3.example.com
-	GetDriverDetails: my-esx-3.example.com
-	Server MOID:  5b56cd3a366c6b3976923bea
-	Computing changes...
-	No changes detected for Server: [FLM2042P049], skipping...
-	Processing {my-esx-3.example.com} : FLM2042P049 complete.
-	====================================================================================
-	Transcript stopped, output file is C:\ProgramData\Cisco\SystemDiscovery\discovery_131768894634013608.out
+	myvcenter.example.com          443   VSPHERE.LOCAL\Administrator
+	VERBOSE: Connecting to Cisco Intersight URL with API Keys:  https://intersight.com/api/v1
+	VERBOSE: ------------------------------------------------------------------------------------
+	VERBOSE: Processing {my-esx-1.example.com} :
+	VERBOSE: Intersight API GET succeeded for host FCH16277YXW
+	VERBOSE: GetOSDetails: my-esx-1.example.com
+	VERBOSE: GetDriverDetails: my-esx-1.example.com
+	VERBOSE: Server MOID:  5b56cd3a366c6b3976923be4
+	VERBOSE: Computing changes...
+	VERBOSE: Changes detected for Server: [FCH16277YXW], PATCHing to Intersight...
+	VERBOSE: Processing {my-esx-1.example.com} : FCH16277YXW complete.
+	VERBOSE: ====================================================================================
+	VERBOSE: ------------------------------------------------------------------------------------
+	VERBOSE: Processing {my-esx-2.example.com} : FCH16277YXW
+	VERBOSE: Intersight API GET succeeded for host FCH17247F8E
+	VERBOSE: GetOSDetails: my-esx-2.example.com
+	VERBOSE: GetDriverDetails: my-esx-2.example.com
+	VERBOSE: Server MOID:  5b56cd3a366c6b3976923be7
+	VERBOSE: Computing changes...
+	VERBOSE: Changes detected for Server: [FCH16277YXW], PATCHing to Intersight...
+	VERBOSE: Processing {my-esx-2.example.com} : FCH17247F8E complete.
+	VERBOSE: ====================================================================================
+	VERBOSE: ------------------------------------------------------------------------------------
+	VERBOSE: Processing {my-esx-3.example.com} : FCH17247F8E
+	VERBOSE: Intersight API GET succeeded for host FLM2042P049
+	VERBOSE: GetOSDetails: my-esx-3.example.com
+	VERBOSE: GetDriverDetails: my-esx-3.example.com
+	VERBOSE: Server MOID:  5b56cd3a366c6b3976923bea
+	VERBOSE: Computing changes...
+	VERBOSE: No changes detected for Server: [FLM2042P049], skipping...
+	VERBOSE: Processing {my-esx-3.example.com} : FLM2042P049 complete.
+	VERBOSE: ====================================================================================
+	VERBOSE: Transcript stopped, output file is C:\ProgramData\Cisco\SystemDiscovery\discovery_131768894634013608.out
 
   ```
-  
+
   ---
   ## Other applications
-  This toolset can be configured to run periodically to ensure changes are captured and sent to Cisco Intersight for 
+  This toolset can be configured to run periodically to ensure changes are captured and sent to Cisco Intersight for
   evaluation using the following tools in windows:
-  1. Windows Task Scheduler   
-  Please refer to corresponding documentation:   
-  https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-scheduler-start-page 
-  2. SCOM (System Center Operations Manager)   
-  Please refer to corresponding documentation:   
-  https://docs.microsoft.com/en-us/system-center/scom/manage-running-tasks?view=sc-om-1801   
-  
+  1. Windows Task Scheduler
+  Please refer to corresponding documentation:
+  https://docs.microsoft.com/en-us/windows/desktop/taskschd/task-scheduler-start-page
+  2. SCOM (System Center Operations Manager)
+  Please refer to corresponding documentation:
+  https://docs.microsoft.com/en-us/system-center/scom/manage-running-tasks?view=sc-om-1801
