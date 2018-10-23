@@ -29,6 +29,9 @@ function New-HyperflexLocalCredentialPolicy {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -37,6 +40,9 @@ function New-HyperflexLocalCredentialPolicy {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.HyperflexClusterProfileRef[]]]
         ${ClusterProfiles},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${FactoryHypervisorPassword},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${HxdpRootPwd},
@@ -71,9 +77,11 @@ function New-HyperflexLocalCredentialPolicy {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name},
             ${ClusterProfiles},
+            ${FactoryHypervisorPassword},
             ${HxdpRootPwd},
             ${HypervisorAdmin},
             ${HypervisorAdminPwd},

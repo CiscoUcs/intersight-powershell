@@ -29,6 +29,9 @@ function New-StoragePhysicalDiskExtension {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeviceMoId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -86,6 +89,7 @@ function New-StoragePhysicalDiskExtension {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceMoId},
             ${Dn},
             ${Rn},

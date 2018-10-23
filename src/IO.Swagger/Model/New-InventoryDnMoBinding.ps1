@@ -29,6 +29,9 @@ function New-InventoryDnMoBinding {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Dn},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -56,6 +59,7 @@ function New-InventoryDnMoBinding {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Dn},
             ${RegisteredDevice},
             ${TargetMoId},

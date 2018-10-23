@@ -29,14 +29,8 @@ function New-AssetDeviceRegistration {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${AccessKey},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${AccessKeyId},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[intersight.Model.IamAccountRef]]
-        ${Account},
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]
         ${ApiVersion},
@@ -44,11 +38,8 @@ function New-AssetDeviceRegistration {
         [System.Nullable[Int64]]
         ${AppPartitionNumber},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[intersight.Model.IamUserRef]]
-        ${ClaimedByUser},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[System.DateTime]]
-        ${ClaimedTime},
+        [String]
+        ${ConnectionId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ConnectionReason},
@@ -62,14 +53,35 @@ function New-AssetDeviceRegistration {
         [String]
         ${ConnectorVersion},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DeviceExternalIpAddress},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ProxyApp},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${AccessKeyId},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamAccountRef]]
+        ${Account},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamUserRef]]
+        ${ClaimedByUser},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ClaimedByUserName},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[System.DateTime]]
+        ${ClaimedTime},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.AssetClusterMemberRef[]]]
+        ${ClusterMembers},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.AssetDeviceClaimRef]]
         ${DeviceClaim},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.AssetDeviceConfigurationRef]]
         ${DeviceConfiguration},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DeviceExternalIpAddress},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[String[]]]
         ${DeviceHostname},
@@ -90,13 +102,7 @@ function New-AssetDeviceRegistration {
         ${PlatformType},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${ProxyApp},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
         ${PublicAccessKey},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${PublicKeyUpgraded},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ReadOnly},
@@ -125,29 +131,31 @@ function New-AssetDeviceRegistration {
             ${Owners},
             ${Parent},
             ${Tags},
-            ${AccessKey},
-            ${AccessKeyId},
-            ${Account},
+            ${VersionContext},
             ${ApiVersion},
             ${AppPartitionNumber},
-            ${ClaimedByUser},
-            ${ClaimedTime},
+            ${ConnectionId},
             ${ConnectionReason},
             ${ConnectionStatus},
             ${ConnectionStatusLastChangeTime},
             ${ConnectorVersion},
+            ${DeviceExternalIpAddress},
+            ${ProxyApp},
+            ${AccessKeyId},
+            ${Account},
+            ${ClaimedByUser},
+            ${ClaimedByUserName},
+            ${ClaimedTime},
+            ${ClusterMembers},
             ${DeviceClaim},
             ${DeviceConfiguration},
-            ${DeviceExternalIpAddress},
             ${DeviceHostname},
             ${DeviceIpAddress},
             ${DomainGroup},
             ${ExecutionMode},
             ${Pid},
             ${PlatformType},
-            ${ProxyApp},
             ${PublicAccessKey},
-            ${PublicKeyUpgraded},
             ${ReadOnly},
             ${SecurityToken},
             ${Serial},

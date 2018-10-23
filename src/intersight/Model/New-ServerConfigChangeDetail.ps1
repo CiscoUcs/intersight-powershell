@@ -2,20 +2,53 @@ function New-ServerConfigChangeDetail {
     [CmdletBinding()]
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${AccountMoid},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoBaseMoRef[]]]
+        ${Ancestors},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[System.DateTime]]
+        ${CreateTime},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[System.DateTime]]
+        ${ModTime},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Moid},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ObjectType},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[String[]]]
+        ${Owners},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoBaseMoRef]]
+        ${Parent},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoTag[]]]
+        ${Tags},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[String[]]]
+        ${Changes},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.PolicyConfigResultContext]]
         ${ConfigChangeContext},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${ConfigChangeType},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
-        ${DisruptionType},
+        [System.Nullable[String[]]]
+        ${Disruptions},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Message},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[String]]
-        ${MessageParams}
+        [String]
+        ${ModStatus},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.ServerProfileRef]]
+        ${Profile}
     )
 
     Process {
@@ -23,11 +56,22 @@ function New-ServerConfigChangeDetail {
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
         New-Object -TypeName intersight.Model.ServerConfigChangeDetail -ArgumentList @(
+            ${AccountMoid},
+            ${Ancestors},
+            ${CreateTime},
+            ${ModTime},
+            ${Moid},
+            ${ObjectType},
+            ${Owners},
+            ${Parent},
+            ${Tags},
+            ${VersionContext},
+            ${Changes},
             ${ConfigChangeContext},
-            ${ConfigChangeType},
-            ${DisruptionType},
+            ${Disruptions},
             ${Message},
-            ${MessageParams}
+            ${ModStatus},
+            ${Profile}
         )
     }
 }

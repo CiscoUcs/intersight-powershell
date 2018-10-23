@@ -34,6 +34,9 @@ $Script:AdapterHostIscsiInterfaceApi= New-Object -TypeName intersight.Api.Adapte
 'Creating object: intersight.Api.AdapterUnitApi' | Write-Verbose
 $Script:AdapterUnitApi= New-Object -TypeName intersight.Api.AdapterUnitApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.AssetClusterMemberApi' | Write-Verbose
+$Script:AssetClusterMemberApi= New-Object -TypeName intersight.Api.AssetClusterMemberApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.AssetDeviceClaimApi' | Write-Verbose
 $Script:AssetDeviceClaimApi= New-Object -TypeName intersight.Api.AssetDeviceClaimApi -ArgumentList @($null)
 
@@ -82,6 +85,18 @@ $Script:CondHclStatusJobApi= New-Object -TypeName intersight.Api.CondHclStatusJo
 'Creating object: intersight.Api.CryptEncryptionTokenApi' | Write-Verbose
 $Script:CryptEncryptionTokenApi= New-Object -TypeName intersight.Api.CryptEncryptionTokenApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.CvdDeploymentTaskApi' | Write-Verbose
+$Script:CvdDeploymentTaskApi= New-Object -TypeName intersight.Api.CvdDeploymentTaskApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.CvdTemplateApi' | Write-Verbose
+$Script:CvdTemplateApi= New-Object -TypeName intersight.Api.CvdTemplateApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.CvdValidationTaskApi' | Write-Verbose
+$Script:CvdValidationTaskApi= New-Object -TypeName intersight.Api.CvdValidationTaskApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.DeviceconnectorPolicyApi' | Write-Verbose
+$Script:DeviceconnectorPolicyApi= New-Object -TypeName intersight.Api.DeviceconnectorPolicyApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.DeviceinfoSerialNumberInfoApi' | Write-Verbose
 $Script:DeviceinfoSerialNumberInfoApi= New-Object -TypeName intersight.Api.DeviceinfoSerialNumberInfoApi -ArgumentList @($null)
 
@@ -103,17 +118,29 @@ $Script:EquipmentFexApi= New-Object -TypeName intersight.Api.EquipmentFexApi -Ar
 'Creating object: intersight.Api.EquipmentIoCardApi' | Write-Verbose
 $Script:EquipmentIoCardApi= New-Object -TypeName intersight.Api.EquipmentIoCardApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.EquipmentIoExpanderApi' | Write-Verbose
+$Script:EquipmentIoExpanderApi= New-Object -TypeName intersight.Api.EquipmentIoExpanderApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.EquipmentLocatorLedApi' | Write-Verbose
 $Script:EquipmentLocatorLedApi= New-Object -TypeName intersight.Api.EquipmentLocatorLedApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.EquipmentPsuApi' | Write-Verbose
 $Script:EquipmentPsuApi= New-Object -TypeName intersight.Api.EquipmentPsuApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.EquipmentRackEnclosureApi' | Write-Verbose
+$Script:EquipmentRackEnclosureApi= New-Object -TypeName intersight.Api.EquipmentRackEnclosureApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.EquipmentRackEnclosureSlotApi' | Write-Verbose
+$Script:EquipmentRackEnclosureSlotApi= New-Object -TypeName intersight.Api.EquipmentRackEnclosureSlotApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.EquipmentSwitchCardApi' | Write-Verbose
 $Script:EquipmentSwitchCardApi= New-Object -TypeName intersight.Api.EquipmentSwitchCardApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.EquipmentSystemIoControllerApi' | Write-Verbose
 $Script:EquipmentSystemIoControllerApi= New-Object -TypeName intersight.Api.EquipmentSystemIoControllerApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.EquipmentTpmApi' | Write-Verbose
+$Script:EquipmentTpmApi= New-Object -TypeName intersight.Api.EquipmentTpmApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.EtherPhysicalPortApi' | Write-Verbose
 $Script:EtherPhysicalPortApi= New-Object -TypeName intersight.Api.EtherPhysicalPortApi -ArgumentList @($null)
@@ -154,8 +181,14 @@ $Script:GraphicsControllerApi= New-Object -TypeName intersight.Api.GraphicsContr
 'Creating object: intersight.Api.HclCompatibilityStatusApi' | Write-Verbose
 $Script:HclCompatibilityStatusApi= New-Object -TypeName intersight.Api.HclCompatibilityStatusApi -ArgumentList @($null)
 
-'Creating object: intersight.Api.HclDataImportLogApi' | Write-Verbose
-$Script:HclDataImportLogApi= New-Object -TypeName intersight.Api.HclDataImportLogApi -ArgumentList @($null)
+'Creating object: intersight.Api.HclDriverImageApi' | Write-Verbose
+$Script:HclDriverImageApi= New-Object -TypeName intersight.Api.HclDriverImageApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HclOperatingSystemApi' | Write-Verbose
+$Script:HclOperatingSystemApi= New-Object -TypeName intersight.Api.HclOperatingSystemApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HclOperatingSystemVendorApi' | Write-Verbose
+$Script:HclOperatingSystemVendorApi= New-Object -TypeName intersight.Api.HclOperatingSystemVendorApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.HclServiceStatusApi' | Write-Verbose
 $Script:HclServiceStatusApi= New-Object -TypeName intersight.Api.HclServiceStatusApi -ArgumentList @($null)
@@ -165,6 +198,9 @@ $Script:HclSupportedDriverNameApi= New-Object -TypeName intersight.Api.HclSuppor
 
 'Creating object: intersight.Api.HyperflexAlarmApi' | Write-Verbose
 $Script:HyperflexAlarmApi= New-Object -TypeName intersight.Api.HyperflexAlarmApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexAppCatalogApi' | Write-Verbose
+$Script:HyperflexAppCatalogApi= New-Object -TypeName intersight.Api.HyperflexAppCatalogApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.HyperflexAutoSupportPolicyApi' | Write-Verbose
 $Script:HyperflexAutoSupportPolicyApi= New-Object -TypeName intersight.Api.HyperflexAutoSupportPolicyApi -ArgumentList @($null)
@@ -193,8 +229,20 @@ $Script:HyperflexExtFcStoragePolicyApi= New-Object -TypeName intersight.Api.Hype
 'Creating object: intersight.Api.HyperflexExtIscsiStoragePolicyApi' | Write-Verbose
 $Script:HyperflexExtIscsiStoragePolicyApi= New-Object -TypeName intersight.Api.HyperflexExtIscsiStoragePolicyApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.HyperflexFeatureLimitExternalApi' | Write-Verbose
+$Script:HyperflexFeatureLimitExternalApi= New-Object -TypeName intersight.Api.HyperflexFeatureLimitExternalApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexFeatureLimitInternalApi' | Write-Verbose
+$Script:HyperflexFeatureLimitInternalApi= New-Object -TypeName intersight.Api.HyperflexFeatureLimitInternalApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexHxdpVersionApi' | Write-Verbose
+$Script:HyperflexHxdpVersionApi= New-Object -TypeName intersight.Api.HyperflexHxdpVersionApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.HyperflexLocalCredentialPolicyApi' | Write-Verbose
 $Script:HyperflexLocalCredentialPolicyApi= New-Object -TypeName intersight.Api.HyperflexLocalCredentialPolicyApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexNodeApi' | Write-Verbose
+$Script:HyperflexNodeApi= New-Object -TypeName intersight.Api.HyperflexNodeApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.HyperflexNodeConfigPolicyApi' | Write-Verbose
 $Script:HyperflexNodeConfigPolicyApi= New-Object -TypeName intersight.Api.HyperflexNodeConfigPolicyApi -ArgumentList @($null)
@@ -204,6 +252,12 @@ $Script:HyperflexNodeProfileApi= New-Object -TypeName intersight.Api.HyperflexNo
 
 'Creating object: intersight.Api.HyperflexProxySettingPolicyApi' | Write-Verbose
 $Script:HyperflexProxySettingPolicyApi= New-Object -TypeName intersight.Api.HyperflexProxySettingPolicyApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexServerFirmwareVersionApi' | Write-Verbose
+$Script:HyperflexServerFirmwareVersionApi= New-Object -TypeName intersight.Api.HyperflexServerFirmwareVersionApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.HyperflexServerModelApi' | Write-Verbose
+$Script:HyperflexServerModelApi= New-Object -TypeName intersight.Api.HyperflexServerModelApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.HyperflexSysConfigPolicyApi' | Write-Verbose
 $Script:HyperflexSysConfigPolicyApi= New-Object -TypeName intersight.Api.HyperflexSysConfigPolicyApi -ArgumentList @($null)
@@ -223,8 +277,14 @@ $Script:IaasDeviceStatusApi= New-Object -TypeName intersight.Api.IaasDeviceStatu
 'Creating object: intersight.Api.IaasLicenseInfoApi' | Write-Verbose
 $Script:IaasLicenseInfoApi= New-Object -TypeName intersight.Api.IaasLicenseInfoApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.IaasMostRunTasksApi' | Write-Verbose
+$Script:IaasMostRunTasksApi= New-Object -TypeName intersight.Api.IaasMostRunTasksApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.IaasUcsdInfoApi' | Write-Verbose
 $Script:IaasUcsdInfoApi= New-Object -TypeName intersight.Api.IaasUcsdInfoApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.IaasUcsdManagedInfraApi' | Write-Verbose
+$Script:IaasUcsdManagedInfraApi= New-Object -TypeName intersight.Api.IaasUcsdManagedInfraApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.IamAccountApi' | Write-Verbose
 $Script:IamAccountApi= New-Object -TypeName intersight.Api.IamAccountApi -ArgumentList @($null)
@@ -282,6 +342,9 @@ $Script:IamResourceLimitsApi= New-Object -TypeName intersight.Api.IamResourceLim
 
 'Creating object: intersight.Api.IamRoleApi' | Write-Verbose
 $Script:IamRoleApi= New-Object -TypeName intersight.Api.IamRoleApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.IamServiceProviderApi' | Write-Verbose
+$Script:IamServiceProviderApi= New-Object -TypeName intersight.Api.IamServiceProviderApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.IamSessionApi' | Write-Verbose
 $Script:IamSessionApi= New-Object -TypeName intersight.Api.IamSessionApi -ArgumentList @($null)
@@ -367,14 +430,11 @@ $Script:NetworkconfigPolicyApi= New-Object -TypeName intersight.Api.Networkconfi
 'Creating object: intersight.Api.NtpPolicyApi' | Write-Verbose
 $Script:NtpPolicyApi= New-Object -TypeName intersight.Api.NtpPolicyApi -ArgumentList @($null)
 
-'Creating object: intersight.Api.OauthAccessTokenApi' | Write-Verbose
-$Script:OauthAccessTokenApi= New-Object -TypeName intersight.Api.OauthAccessTokenApi -ArgumentList @($null)
+'Creating object: intersight.Api.OauthOauthUserApi' | Write-Verbose
+$Script:OauthOauthUserApi= New-Object -TypeName intersight.Api.OauthOauthUserApi -ArgumentList @($null)
 
-'Creating object: intersight.Api.OauthOauthResponseApi' | Write-Verbose
-$Script:OauthOauthResponseApi= New-Object -TypeName intersight.Api.OauthOauthResponseApi -ArgumentList @($null)
-
-'Creating object: intersight.Api.OauthRedirectUrlApi' | Write-Verbose
-$Script:OauthRedirectUrlApi= New-Object -TypeName intersight.Api.OauthRedirectUrlApi -ArgumentList @($null)
+'Creating object: intersight.Api.PciDeviceApi' | Write-Verbose
+$Script:PciDeviceApi= New-Object -TypeName intersight.Api.PciDeviceApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.PortGroupApi' | Write-Verbose
 $Script:PortGroupApi= New-Object -TypeName intersight.Api.PortGroupApi -ArgumentList @($null)
@@ -385,8 +445,11 @@ $Script:PortSubGroupApi= New-Object -TypeName intersight.Api.PortSubGroupApi -Ar
 'Creating object: intersight.Api.ProcessorUnitApi' | Write-Verbose
 $Script:ProcessorUnitApi= New-Object -TypeName intersight.Api.ProcessorUnitApi -ArgumentList @($null)
 
-'Creating object: intersight.Api.RestApiApi' | Write-Verbose
-$Script:RestApiApi= New-Object -TypeName intersight.Api.RestApiApi -ArgumentList @($null)
+'Creating object: intersight.Api.ResourceGroupApi' | Write-Verbose
+$Script:ResourceGroupApi= New-Object -TypeName intersight.Api.ResourceGroupApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.SdcardPolicyApi' | Write-Verbose
+$Script:SdcardPolicyApi= New-Object -TypeName intersight.Api.SdcardPolicyApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.SearchSearchItemApi' | Write-Verbose
 $Script:SearchSearchItemApi= New-Object -TypeName intersight.Api.SearchSearchItemApi -ArgumentList @($null)
@@ -399,6 +462,9 @@ $Script:SearchTagItemApi= New-Object -TypeName intersight.Api.SearchTagItemApi -
 
 'Creating object: intersight.Api.SecurityUnitApi' | Write-Verbose
 $Script:SecurityUnitApi= New-Object -TypeName intersight.Api.SecurityUnitApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.ServerConfigChangeDetailApi' | Write-Verbose
+$Script:ServerConfigChangeDetailApi= New-Object -TypeName intersight.Api.ServerConfigChangeDetailApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.ServerConfigResultApi' | Write-Verbose
 $Script:ServerConfigResultApi= New-Object -TypeName intersight.Api.ServerConfigResultApi -ArgumentList @($null)
@@ -414,6 +480,9 @@ $Script:SmtpPolicyApi= New-Object -TypeName intersight.Api.SmtpPolicyApi -Argume
 
 'Creating object: intersight.Api.SnmpPolicyApi' | Write-Verbose
 $Script:SnmpPolicyApi= New-Object -TypeName intersight.Api.SnmpPolicyApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.SoftwarerepositoryAuthorizationApi' | Write-Verbose
+$Script:SoftwarerepositoryAuthorizationApi= New-Object -TypeName intersight.Api.SoftwarerepositoryAuthorizationApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.SolPolicyApi' | Write-Verbose
 $Script:SolPolicyApi= New-Object -TypeName intersight.Api.SolPolicyApi -ArgumentList @($null)
@@ -472,8 +541,17 @@ $Script:StorageVdMemberEpApi= New-Object -TypeName intersight.Api.StorageVdMembe
 'Creating object: intersight.Api.StorageVirtualDriveApi' | Write-Verbose
 $Script:StorageVirtualDriveApi= New-Object -TypeName intersight.Api.StorageVirtualDriveApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.StorageVirtualDriveExtensionApi' | Write-Verbose
+$Script:StorageVirtualDriveExtensionApi= New-Object -TypeName intersight.Api.StorageVirtualDriveExtensionApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.SyslogPolicyApi' | Write-Verbose
+$Script:SyslogPolicyApi= New-Object -TypeName intersight.Api.SyslogPolicyApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.TaskWorkflowActionApi' | Write-Verbose
 $Script:TaskWorkflowActionApi= New-Object -TypeName intersight.Api.TaskWorkflowActionApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.TelemetryTimeSeriesApi' | Write-Verbose
+$Script:TelemetryTimeSeriesApi= New-Object -TypeName intersight.Api.TelemetryTimeSeriesApi -ArgumentList @($null)
 
 'Creating object: intersight.Api.TerminalAuditLogApi' | Write-Verbose
 $Script:TerminalAuditLogApi= New-Object -TypeName intersight.Api.TerminalAuditLogApi -ArgumentList @($null)
@@ -499,6 +577,12 @@ $Script:VmediaPolicyApi= New-Object -TypeName intersight.Api.VmediaPolicyApi -Ar
 'Creating object: intersight.Api.WorkflowBuildTaskMetaApi' | Write-Verbose
 $Script:WorkflowBuildTaskMetaApi= New-Object -TypeName intersight.Api.WorkflowBuildTaskMetaApi -ArgumentList @($null)
 
+'Creating object: intersight.Api.WorkflowBuildTaskMetaOwnerApi' | Write-Verbose
+$Script:WorkflowBuildTaskMetaOwnerApi= New-Object -TypeName intersight.Api.WorkflowBuildTaskMetaOwnerApi -ArgumentList @($null)
+
+'Creating object: intersight.Api.WorkflowPendingDynamicWorkflowInfoApi' | Write-Verbose
+$Script:WorkflowPendingDynamicWorkflowInfoApi= New-Object -TypeName intersight.Api.WorkflowPendingDynamicWorkflowInfoApi -ArgumentList @($null)
+
 'Creating object: intersight.Api.WorkflowTaskInfoApi' | Write-Verbose
 $Script:WorkflowTaskInfoApi= New-Object -TypeName intersight.Api.WorkflowTaskInfoApi -ArgumentList @($null)
 
@@ -510,9 +594,6 @@ $Script:WorkflowWorkflowInfoApi= New-Object -TypeName intersight.Api.WorkflowWor
 
 'Creating object: intersight.Api.WorkflowWorkflowMetaApi' | Write-Verbose
 $Script:WorkflowWorkflowMetaApi= New-Object -TypeName intersight.Api.WorkflowWorkflowMetaApi -ArgumentList @($null)
-
-'Creating object: intersight.Api.WorkflowWorkflowTaskApi' | Write-Verbose
-$Script:WorkflowWorkflowTaskApi= New-Object -TypeName intersight.Api.WorkflowWorkflowTaskApi -ArgumentList @($null)
 
 
 #endregion

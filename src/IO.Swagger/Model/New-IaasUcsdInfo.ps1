@@ -29,6 +29,9 @@ function New-IaasUcsdInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IaasConnectorPackRef[]]]
         ${ConnectorPack},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -50,6 +53,12 @@ function New-IaasUcsdInfo {
         [System.Nullable[intersight.Model.IaasLicenseInfoRef]]
         ${LicenseInfo},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IaasMostRunTasksRef[]]]
+        ${MostRunTasks},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${NodeType},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ProductName},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -63,7 +72,10 @@ function New-IaasUcsdInfo {
         ${RegisteredDevice},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Status}
+        ${Status},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IaasUcsdManagedInfraRef]]
+        ${UcsdManagedInfra}
     )
 
     Process {
@@ -80,6 +92,7 @@ function New-IaasUcsdInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${ConnectorPack},
             ${DeviceId},
             ${DeviceStatus},
@@ -87,11 +100,14 @@ function New-IaasUcsdInfo {
             ${HostName},
             ${Ip},
             ${LicenseInfo},
+            ${MostRunTasks},
+            ${NodeType},
             ${ProductName},
             ${ProductVendor},
             ${ProductVersion},
             ${RegisteredDevice},
-            ${Status}
+            ${Status},
+            ${UcsdManagedInfra}
         )
     }
 }

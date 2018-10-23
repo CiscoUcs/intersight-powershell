@@ -29,6 +29,9 @@ function New-WorkflowWorkflowMeta {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,14 +56,14 @@ function New-WorkflowWorkflowMeta {
         [System.Nullable[String]]
         ${Tasks},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Type},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]
         ${Version},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
-        ${WaitOnDuplicate},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[intersight.Model.WorkflowWorkflowTaskRef[]]]
-        ${WorkflowTasks}
+        ${WaitOnDuplicate}
     )
 
     Process {
@@ -77,6 +80,7 @@ function New-WorkflowWorkflowMeta {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Account},
             ${Description},
             ${InputParameters},
@@ -85,9 +89,9 @@ function New-WorkflowWorkflowMeta {
             ${SchemaVersion},
             ${Src},
             ${Tasks},
+            ${Type},
             ${Version},
-            ${WaitOnDuplicate},
-            ${WorkflowTasks}
+            ${WaitOnDuplicate}
         )
     }
 }

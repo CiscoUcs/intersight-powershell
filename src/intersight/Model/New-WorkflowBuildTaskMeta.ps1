@@ -29,6 +29,9 @@ function New-WorkflowBuildTaskMeta {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -59,6 +62,7 @@ function New-WorkflowBuildTaskMeta {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Name},
             ${Src},
             ${TaskList},

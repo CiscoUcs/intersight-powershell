@@ -38,7 +38,7 @@ function New-HyperflexSummary {
         [String]
         ${Name},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [String]
+        [System.Nullable[String]]
         ${ResiliencyDetails},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]

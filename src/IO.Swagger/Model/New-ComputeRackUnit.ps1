@@ -29,6 +29,9 @@ function New-ComputeRackUnit {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeviceMoId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -137,8 +140,14 @@ function New-ComputeRackUnit {
         [System.Nullable[intersight.Model.EquipmentLocatorLedRef]]
         ${LocatorLed},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.PciDeviceRef[]]]
+        ${PciDevices},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.EquipmentPsuRef[]]]
         ${Psus},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.EquipmentRackEnclosureSlotRef]]
+        ${RackEnclosureSlot},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.AssetDeviceRegistrationRef]]
         ${RegisteredDevice},
@@ -170,6 +179,7 @@ function New-ComputeRackUnit {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceMoId},
             ${Dn},
             ${Rn},
@@ -206,7 +216,9 @@ function New-ComputeRackUnit {
             ${Fanmodules},
             ${GenericInventoryHolders},
             ${LocatorLed},
+            ${PciDevices},
             ${Psus},
+            ${RackEnclosureSlot},
             ${RegisteredDevice},
             ${SasExpanders},
             ${ServerId},

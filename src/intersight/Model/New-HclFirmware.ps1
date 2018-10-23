@@ -15,7 +15,10 @@ function New-HclFirmware {
         ${FirmwareVersion},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Id}
+        ${Id},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${LatestDriver}
     )
 
     Process {
@@ -27,7 +30,8 @@ function New-HclFirmware {
             ${DriverVersion},
             ${ErrorCode},
             ${FirmwareVersion},
-            ${Id}
+            ${Id},
+            ${LatestDriver}
         )
     }
 }

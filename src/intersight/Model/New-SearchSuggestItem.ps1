@@ -29,6 +29,9 @@ function New-SearchSuggestItem {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${CompleteMo},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -62,6 +65,7 @@ function New-SearchSuggestItem {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${CompleteMo},
             ${Rawquery},
             ${Skip},

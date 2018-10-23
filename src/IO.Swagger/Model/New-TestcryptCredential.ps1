@@ -29,6 +29,9 @@ function New-TestcryptCredential {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -56,6 +59,7 @@ function New-TestcryptCredential {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Account},
             ${IsPasswordSet},
             ${Password},

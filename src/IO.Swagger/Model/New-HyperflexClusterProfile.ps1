@@ -29,6 +29,9 @@ function New-HyperflexClusterProfile {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -67,6 +70,9 @@ function New-HyperflexClusterProfile {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.HyperflexExtIscsiStoragePolicyRef]]
         ${ExtIscsiStorage},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${HxdpVersion},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${HypervisorType},
@@ -128,6 +134,7 @@ function New-HyperflexClusterProfile {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name},
             ${SrcTemplate},
@@ -141,6 +148,7 @@ function New-HyperflexClusterProfile {
             ${DataIpAddress},
             ${ExtFcStorage},
             ${ExtIscsiStorage},
+            ${HxdpVersion},
             ${HypervisorType},
             ${LocalCredential},
             ${MacAddressPrefix},

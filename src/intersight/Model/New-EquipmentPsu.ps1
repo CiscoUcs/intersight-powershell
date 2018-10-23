@@ -29,6 +29,9 @@ function New-EquipmentPsu {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeviceMoId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -55,6 +58,9 @@ function New-EquipmentPsu {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.EquipmentChassisRef]]
         ${EquipmentChassis},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.EquipmentRackEnclosureRef]]
+        ${EquipmentRackEnclosure},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.NetworkElementRef]]
         ${NetworkElement},
@@ -86,6 +92,7 @@ function New-EquipmentPsu {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceMoId},
             ${Dn},
             ${Rn},
@@ -95,6 +102,7 @@ function New-EquipmentPsu {
             ${Vendor},
             ${ComputeRackUnit},
             ${EquipmentChassis},
+            ${EquipmentRackEnclosure},
             ${NetworkElement},
             ${OperState},
             ${Presence},

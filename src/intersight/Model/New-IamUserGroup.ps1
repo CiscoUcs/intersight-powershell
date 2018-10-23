@@ -29,11 +29,20 @@ function New-IamUserGroup {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamIdpRef]]
+        ${Idp},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamIdpReferenceRef]]
         ${Idpreference},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamPermissionRef[]]]
+        ${Permissions},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamQualifierRef]]
         ${Qualifier},
@@ -56,8 +65,11 @@ function New-IamUserGroup {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
+            ${Idp},
             ${Idpreference},
             ${Name},
+            ${Permissions},
             ${Qualifier},
             ${Users}
         )

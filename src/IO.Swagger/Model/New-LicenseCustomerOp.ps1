@@ -29,6 +29,9 @@ function New-LicenseCustomerOp {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.LicenseAccountLicenseDataRef]]
         ${AccountLicenseData},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -59,6 +62,7 @@ function New-LicenseCustomerOp {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AccountLicenseData},
             ${DeregisterDevice},
             ${RenewAuthorization},

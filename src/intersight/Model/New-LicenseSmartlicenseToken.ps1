@@ -29,6 +29,9 @@ function New-LicenseSmartlicenseToken {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.LicenseAccountLicenseDataRef]]
         ${AccountLicenseData},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -50,6 +53,7 @@ function New-LicenseSmartlicenseToken {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AccountLicenseData},
             ${Token}
         )

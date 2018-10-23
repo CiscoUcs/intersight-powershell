@@ -29,6 +29,9 @@ function New-FirmwareUpgrade {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.AssetDeviceRegistrationRef]]
         ${Device},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -65,6 +68,7 @@ function New-FirmwareUpgrade {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Device},
             ${DirectDownload},
             ${Distributable},

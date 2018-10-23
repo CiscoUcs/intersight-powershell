@@ -29,6 +29,9 @@ function New-IamUser {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamApiKeyRef[]]]
         ${ApiKeys},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -41,6 +44,9 @@ function New-IamUser {
         [String]
         ${FirstName},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamIdpRef]]
+        ${Idp},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamIdpReferenceRef]]
         ${Idpreference},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -52,6 +58,9 @@ function New-IamUser {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamPermissionRef[]]]
+        ${Permissions},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamSessionRef[]]]
         ${Sessions},
@@ -74,14 +83,17 @@ function New-IamUser {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${ApiKeys},
             ${ClientIpAddress},
             ${Email},
             ${FirstName},
+            ${Idp},
             ${Idpreference},
             ${LastLoginTime},
             ${LastName},
             ${Name},
+            ${Permissions},
             ${Sessions},
             ${UserType}
         )

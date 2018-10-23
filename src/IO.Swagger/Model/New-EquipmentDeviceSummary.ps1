@@ -29,6 +29,9 @@ function New-EquipmentDeviceSummary {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Dn},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -59,6 +62,7 @@ function New-EquipmentDeviceSummary {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Dn},
             ${Model},
             ${RegisteredDevice},

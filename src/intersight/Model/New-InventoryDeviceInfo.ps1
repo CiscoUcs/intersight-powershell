@@ -29,11 +29,17 @@ function New-InventoryDeviceInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]
         ${EventCounter},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${EventCounterEnabled},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Int64]]
+        ${Interval},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.InventoryJobInfo[]]]
         ${JobInfo},
@@ -56,8 +62,10 @@ function New-InventoryDeviceInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${EventCounter},
             ${EventCounterEnabled},
+            ${Interval},
             ${JobInfo},
             ${RegisteredDevice}
         )

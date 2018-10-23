@@ -29,6 +29,9 @@ function New-IamSystem {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamEndPointPrivilegeRef[]]]
         ${EndPointPrivileges},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -45,7 +48,10 @@ function New-IamSystem {
         ${Privileges},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamRoleRef[]]]
-        ${Roles}
+        ${Roles},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamServiceProviderRef]]
+        ${ServiceProvider}
     )
 
     Process {
@@ -62,12 +68,14 @@ function New-IamSystem {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${EndPointPrivileges},
             ${EndPointRoles},
             ${Idp},
             ${PrivilegeSets},
             ${Privileges},
-            ${Roles}
+            ${Roles},
+            ${ServiceProvider}
         )
     }
 }

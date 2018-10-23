@@ -27,7 +27,10 @@ function New-ViewsView {
         ${Parent},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.MoTag[]]]
-        ${Tags}
+        ${Tags},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext}
     )
 
     Process {
@@ -43,7 +46,8 @@ function New-ViewsView {
             ${ObjectType},
             ${Owners},
             ${Parent},
-            ${Tags}
+            ${Tags},
+            ${VersionContext}
         )
     }
 }

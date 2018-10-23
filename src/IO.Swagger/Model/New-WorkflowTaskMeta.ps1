@@ -29,6 +29,9 @@ function New-WorkflowTaskMeta {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ActionType},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -37,6 +40,9 @@ function New-WorkflowTaskMeta {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[String[]]]
         ${InputKeys},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Internal},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
@@ -80,9 +86,11 @@ function New-WorkflowTaskMeta {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${ActionType},
             ${Description},
             ${InputKeys},
+            ${Internal},
             ${Name},
             ${OutputKeys},
             ${ResponseTimeoutSec},

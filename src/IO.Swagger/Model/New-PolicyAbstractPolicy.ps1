@@ -29,6 +29,9 @@ function New-PolicyAbstractPolicy {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -50,6 +53,7 @@ function New-PolicyAbstractPolicy {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name}
         )

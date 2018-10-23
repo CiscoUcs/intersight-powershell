@@ -3,13 +3,25 @@ function New-DevopsNotificationTrigger {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
+        ${Account},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DomainGroup},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${MoType},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${ModificationType},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
         ${Moid},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Motype},
+        ${SecurityContextSubject},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${PerformInSystemContext}
+        [String]
+        ${SecurityContextType}
     )
 
     Process {
@@ -17,9 +29,13 @@ function New-DevopsNotificationTrigger {
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
         New-Object -TypeName intersight.Model.DevopsNotificationTrigger -ArgumentList @(
+            ${Account},
+            ${DomainGroup},
+            ${MoType},
+            ${ModificationType},
             ${Moid},
-            ${Motype},
-            ${PerformInSystemContext}
+            ${SecurityContextSubject},
+            ${SecurityContextType}
         )
     }
 }

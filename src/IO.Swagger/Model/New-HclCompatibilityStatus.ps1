@@ -29,6 +29,9 @@ function New-HclCompatibilityStatus {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.HclHardwareCompatibilityProfile[]]]
         ${ProfileList},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -50,6 +53,7 @@ function New-HclCompatibilityStatus {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${ProfileList},
             ${RequestType}
         )

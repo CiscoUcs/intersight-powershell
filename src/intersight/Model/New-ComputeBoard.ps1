@@ -29,6 +29,9 @@ function New-ComputeBoard {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeviceMoId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -61,6 +64,9 @@ function New-ComputeBoard {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${CpuTypeController},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.EquipmentTpmRef[]]]
+        ${EquipmentTpms},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.GraphicsCardRef[]]]
         ${GraphicsCards},
@@ -107,6 +113,7 @@ function New-ComputeBoard {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceMoId},
             ${Dn},
             ${Rn},
@@ -118,6 +125,7 @@ function New-ComputeBoard {
             ${ComputeBlade},
             ${ComputeRackUnit},
             ${CpuTypeController},
+            ${EquipmentTpms},
             ${GraphicsCards},
             ${MemoryArrays},
             ${OperPowerState},

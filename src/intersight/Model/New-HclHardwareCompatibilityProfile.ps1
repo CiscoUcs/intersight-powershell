@@ -3,6 +3,9 @@ function New-HclHardwareCompatibilityProfile {
     Param (
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
+        ${DriverIsoUrl},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
         ${ErrorCode},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
@@ -38,6 +41,7 @@ function New-HclHardwareCompatibilityProfile {
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
         New-Object -TypeName intersight.Model.HclHardwareCompatibilityProfile -ArgumentList @(
+            ${DriverIsoUrl},
             ${ErrorCode},
             ${Id},
             ${OsVendor},
