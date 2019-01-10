@@ -2,7 +2,8 @@
 
 .SYNOPSIS
 ODT stands for OS Discovery Toolset.
-This is a simple ODT script to encrypt Cisco Intersight (TM) and vCenter credentials powered by Windows Powershell 4.0+
+This is a simple ODT script to encrypt Cisco Intersight (TM) and vCenter credentials
+It is powered by Powershell (TM) 4.0+
 
 .DESCRIPTION
 This tool needs the following inputs:
@@ -13,7 +14,7 @@ For the ESX platform:
 
 For the Windows platform:
 1. Powershell Session Credentials for Active Directory Lookups
-2. Location of encrypted Cisco Intersight Secret key
+2. Location of encrypted Cisco Intersight (TM) Secret key
 
 .EXAMPLE
 >.\generateSecureCredentials.ps1 -platform ESX
