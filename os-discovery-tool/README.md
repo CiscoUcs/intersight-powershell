@@ -61,7 +61,7 @@
 				"intersight_url": "https://intersight.com/api/v1",
 				# Public API key for Intersight API
 				"intersight_api_key": "5b4cff386d3376393452476f/5b4cfead6d33763934524747/5b4d0c156d33763934525341",
-				# Location of intersight Secret API key file on local filesystem. 
+				# Location of Intersight Secret API key file on local filesystem. 
 				# Notice that this is a relative path from the user's profile.
 				"intersight_secret_file": "Downloads\\secret.pem",
 				# Location of log file. Notice that this is an absolute path.
