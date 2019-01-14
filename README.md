@@ -1,4 +1,4 @@
-# intersight - the PowerShell module for the Intersight REST API
+# Intersight - the PowerShell module for the Intersight REST API
 
 This is Intersight REST API 
 
