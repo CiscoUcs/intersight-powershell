@@ -27,7 +27,9 @@ https://github.com/CiscoUcs/intersight-powershell
 
 Param (
     [Parameter(Mandatory=$true)]
-    [string]$configfile
+    [string]$configfile,
+    [Parameter(Mandatory=$false)]
+    [bool]$session
 )
 
 $mypath = (Resolve-Path .)
@@ -82,7 +84,12 @@ Function ConnectvCenter {
     $vCenter_creds_file_path=$env:USERPROFILE+"\"+$env.config.vCenter_creds_file
     $vcenterCredentials = Import-Clixml -Path $vCenter_creds_file_path
     try {
-        Connect-ViServer -Server $env.config.vCenter -Credential $vcenterCredentials
+        if(!$session) {
+            Connect-ViServer -Server $env.config.vCenter -Credential $vcenterCredentials
+        }
+        else {
+            Connect-ViServer -Server $env.config.vCenter
+        }
     } catch [System.Exception] {
         Write-Host -ForeGroundColor Red "Could not connect to vCenter: " $env.config.vCenter "Aborting..."
         WriteLog $env "INFO" "Could not connect to vCenter: "$env.config.vCenter", Aborting..."
@@ -214,12 +221,9 @@ Function GetDriverDetails {
             $osInv = New-Object System.Object
             $key = $prefix+"os.driver."+$devcount+".version"
             $osInv | Add-Member -type NoteProperty -name Key -Value $key
-            if($nic.Driver -eq "enic") {
-                $driverVersion = $esxcli.system.module.get.Invoke(@{module=$nic.Driver}).Version.split(",")[0].split(" ")[1]
-            }
-            else
-            {
-                $driverVersion = $esxcli.system.module.get.Invoke(@{module=$nic.Driver}).Version
+            $driverVersion = $esxcli.system.module.get.Invoke(@{module=$nic.Driver}).Version
+            if($driverversion -like "Version*") {
+                $driverVersion = $driverversion.split(",")[0].split(" ")[1]
             }
             $osInv | Add-Member -type NoteProperty -name Value -Value $driverVersion
             $count = $osInvCollection.Add($osInv)
@@ -245,12 +249,9 @@ Function GetDriverDetails {
             $osInv = New-Object System.Object
             $key = $prefix+"os.driver."+$devcount+".version"
             $osInv | Add-Member -type NoteProperty -name Key -Value $key
-            if($hba.Driver -eq "fnic" -or $hba.Driver -eq "megaraid_sas" -or $hba.Driver -eq "ahci") {
-                $driverVersion = $esxcli.system.module.get.Invoke(@{module=$hba.Driver}).Version.split(",")[0].split(" ")[1]
-            }
-            else
-            {
-                $driverVersion = $esxcli.system.module.get.Invoke(@{module=$hba.Driver}).Version
+            $driverVersion = $esxcli.system.module.get.Invoke(@{module=$hba.Driver}).Version
+            if($driverversion -like "Version*") {
+                $driverVersion = $driverversion.split(",")[0].split(" ")[1]
             }
             $osInv | Add-Member -type NoteProperty -name Value -Value $driverVersion
             $count = $osInvCollection.Add($osInv)
@@ -302,19 +303,7 @@ Function LookupIntersightServerBySerial {
     Param([string]$server_serial, [string]$computeType) 
     $obj = $null
     try {
-        if($computeType -eq "blade") {
-            $obj = Invoke-ComputeBladeApiComputeBladesGet $false $null $null $null "Serial eq $server_serial"
-        }
-        else
-        {
-            if($computeType -eq "rack") {
-                $obj = Invoke-ComputeRackUnitApiComputeRackUnitsGet $false $null $null $null "Serial eq $server_serial"
-            }
-            else
-            {
-                Write-Host "Unknown Host: $server_serial, skipping..."
-            }
-        }
+        $obj = Invoke-ComputePhysicalSummaryApiComputePhysicalSummariesGet $false $null $null $null "Serial eq $server_serial"
     } catch [System.Exception]{
         Write-Host -ForegroundColor Red "API GET failed for host $server_serial, $_"
         WriteLog $env "ERROR" "API GET failed for host $server_serial, $_"
@@ -322,6 +311,7 @@ Function LookupIntersightServerBySerial {
     if($obj) {
         Write-Host "Intersight API GET succeeded for host $server_serial"
     }
+    
     Return $obj
 }
 
@@ -434,7 +424,12 @@ Function ValidateEnv {
             exit
         }
 
-        $vCenter_creds_file_path=$env:USERPROFILE+"\"+$env.config.vCenter_creds_file
+        if(!$session) {
+            $vCenter_creds_file_path=$env:USERPROFILE+"\"+$env.config.vCenter_creds_file
+        }
+        else {
+            $vCenter_creds_file_path=$configfile
+        }
         $secret_file_path = $env:USERPROFILE+"\"+$env.config.intersight_secret_file
         if(!(Test-Path -PathType Leaf $vCenter_creds_file_path) -or !(Test-Path -PathType Leaf $secret_file_path) -or !(Test-Path -PathType Container $env.config.logfile_path)) {
             Write-Host -ForegroundColor Red "[ERROR]: vCenter_creds_file, intersight_secret_file, and logfile_path must exist! Cannot Proceed..."
@@ -478,9 +473,10 @@ Function DoDiscovery {
             {
                 $osInvCollection = ProcessHostOsInventory $env $VMHost $esxcli
                 $ServerMoid = $obj.Results[0].Moid
+                $ServerName = $obj.Results[0].Name
                 Write-Host "Server MOID: " $ServerMoid
                 PatchIntersightServerBySerial $env $server_serial $computeType $obj $osInvCollection
-                Write-Host -ForegroundColor Green "Processing {$VMHost} :"$server_serial" complete."
+                Write-Host -ForegroundColor Green "Processing [$ServerName] {$VMHost} :"$server_serial" complete."
             }
             else
             {

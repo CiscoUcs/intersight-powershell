@@ -61,7 +61,7 @@ $storage_device_map = @{
 	"SAS HBA" = "SAS HBA";
 	"NVMe" = "Flash";
 	"LOM" = "LOM";
-    "Intel(R) i350" = "LOM";
+    "Inter(R) i350" = "LOM";
 }
     
 
