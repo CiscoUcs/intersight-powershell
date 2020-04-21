@@ -45,7 +45,7 @@
 	 https://blogs.technet.microsoft.com/ashleymcglone/2016/02/26/install-the-active-directory-powershell-module-on-windows-10/
   ---
   ### III. Setup configurations
-  Edit discovery_config_esx.json to include details as described below. Refer to the comments for additional help. NOTE: Comments are not supported in JSON; please don't leave comments in your configuration files
+  1. Edit discovery_config_esx.json to include details as described below. Refer to the comments for additional help. NOTE: Comments are not supported in JSON; please don't leave comments in your configuration files.
   ```Powershell
    PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> cat ..\..\..\Documents\discovery_config_esx.json
 	{
@@ -54,7 +54,7 @@
 				"vCenter": "myvcenter.example.com",
 				# location of PSCredential file containing vCenter credentials. 
 				# Notice that this is a relative path from the user's profile
-				"vCenter_creds_file": "Documents\\vCenter-creds.xml",
+				"vCenter_creds_file": "Documents\\vCenter-creds.xml",**
 				# Location filter for vCenter location in the hierarchy
 				"location_filter": "my_location",
 				# Intersight URL for API calls
@@ -63,8 +63,8 @@
 				"intersight_api_key": "5b4cff386d3376393452476f/5b4cfead6d33763934524747/5b4d0c156d33763934525341",
 				# Location of intersight Secret API key file on local filesystem. 
 				# Notice that this is a relative path from the user's profile.
-				"intersight_secret_file": "Downloads\\secret.pem",
-				# Location of log file. Notice that this is an absolute path.
+				"intersight_secret_file": "Documents\\secret.pem",
+				# Absolute path of the directory to save the log file.***
 				"logfile_path": "C:\\ProgramData\\Cisco\\SystemDiscovery"
 		}
 	}
@@ -89,12 +89,42 @@
 				"intersight_api_key": "5b4cff386d3376393452476f/5b4cfead6d33763934524747/5b4d0c156d33763934525341",
 				# Location of intersight Secret API key file on local filesystem. 
 				# Notice that this is a relative path from the user's profile.
-				"intersight_secret_file": "Downloads\\secret.pem",
-				# Location of log file. Notice that this is an absolute path.
+				"intersight_secret_file": "Documents\\secret.pem",
+				# Absolute path of the directory to save the log file.***
 				"logfile_path": "C:\\ProgramData\\Cisco\\SystemDiscovery\\"
 		}
 	}
    ```
+   NOTES: 
+     **  The ```vCenter-creds.xml``` is created under the Documents folder, where the Intersight Private Key File(.pem) is located.
+     *** The location of the ```logfile_path``` must be an absolute path and not a file name.  
+   
+  
+  2. Run the ```Build.ps1```, present in the ```/intersight-powershell/``` folder as an Administrator.
+   It will generate ```intersight.psd1``` file under ```/intersight-powershell/src/intersight/```. 
+   
+   You can also run the command on Powershell as: 
+      
+   ```Powershell
+   PS $env:USERPROFILE\Downloads\intersight-powershell> .\Build.ps1 
+   
+   PS $env:USERPROFILE\Downloads\intersight-powershell> dir .\src\intersight
+   
+       Directory: $env:USERPROFILE\Downloads\intersight-powershell\src\intersight
+     
+   Mode                LastWriteTime         Length Name 
+   ----                -------------         ------ ---- 
+   
+   d-----        5/17/2019   5:27 PM                API 
+   d-----        5/17/2019   5:27 PM                Bin 
+   d-----        5/17/2019   5:27 PM                en-US 
+   d-----        5/17/2019   5:27 PM                Model
+   d-----        5/17/2019   5:27 PM                Private
+   -a----        5/17/2019   3:06 PM           6148 .DS_Store
+   -a----        4/10/2020   2:23 AM         156206 intersight.psd1 
+   -a----        5/17/2019   3:06 PM          30946 intersight.psm1 
+   ```
+   
   ---
   ### IV. Run toolset
   #### i. generateSecureCredentials.ps1
@@ -136,6 +166,7 @@
   ```
   
   #### Example run of generateSecureCredentials
+  1. For the ESX Platform: After successfully running "generateSecureCredentials.ps1", an encrypted credential file named "vCenter-creds.xml" is generated in the same directory as the Intersight Private Key File(.pem).
   ```Powershell
    PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -platform esx
 	Encrypt Cisco Intersight Private Credentials in Windows Powershell 4.0+
@@ -147,8 +178,10 @@
 	Supply values for the following parameters:
 	Credential
 	Credentials generated and encrypted!
-	____________________________________
-	
+  ```
+  
+  2. For Windows Platform
+  ```Powershell
    PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\generateSecureCredentials.ps1 -platform windows
 	Encrypt Cisco Intersight Private Credentials in Windows Powershell 4.0+
 	===========================================================================
@@ -171,7 +204,7 @@
 
 
 	SYNTAX
-		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1 [-configfile] <String> [<CommonParameters>]
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getEsxOsInvToIntersight.ps1 [-configfile] <Path_to_discovery_config_esx.json> [<CommonParameters>] 
 
 
 	DESCRIPTION
@@ -192,6 +225,8 @@
 		For technical information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -full".
 		For online help, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\getEsxOsInvToIntersight.ps1 -online"
   ```
+  NOTE: You can also use ```get-help .\getEsxOsInvToIntersight.ps1 -Full``` for a list of Common Parameters.
+  
   #### Example run of getEsxOsInvToIntersight
   ```Powershell
 	PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\getEsxOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_esx.json
@@ -291,7 +326,7 @@
 
 
 	SYNTAX
-		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getWindowsOsInvToIntersight.ps1 [-configfile] <String> [<CommonParameters>]
+		$env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getWindowsOsInvToIntersight.ps1 [-configfile] <Path_to_discovery_config_windows.json> [<CommonParameters>]
 
 
 	DESCRIPTION
@@ -313,6 +348,8 @@
 		For technical information, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getWindowsOsInvToIntersight.ps1 -full".
 		For online help, type: "get-help $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool\getWindowsOsInvToIntersight.ps1 -online"
   ``` 
+  NOTE: You can also use ```get-help .\getWindowsOsInvToIntersight.ps1 -Full``` for a list of Common Parameters.
+  
   #### Example run of getWindowsOsInvToIntersight
   ```Powershell
 	PS $env:USERPROFILE\Downloads\intersight-powershell\os-discovery-tool> .\getWindowsOsInvToIntersight.ps1 -configfile $env:USERPROFILE\Documents\discovery_config_windows.json
