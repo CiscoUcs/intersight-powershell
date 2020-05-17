@@ -29,6 +29,12 @@ function New-IamUserPreference {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamIdpRef]]
+        ${Idp},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamIdpReferenceRef]]
         ${IdpReference},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -50,6 +56,8 @@ function New-IamUserPreference {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
+            ${Idp},
             ${IdpReference},
             ${Preference}
         )

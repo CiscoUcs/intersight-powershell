@@ -29,6 +29,9 @@ function New-FirmwareUpgradeStatus {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DownloadError},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -74,6 +77,7 @@ function New-FirmwareUpgradeStatus {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DownloadError},
             ${DownloadPercentage},
             ${DownloadStage},

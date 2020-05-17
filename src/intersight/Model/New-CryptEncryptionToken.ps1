@@ -29,6 +29,9 @@ function New-CryptEncryptionToken {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.CryptAccountKeyRef]]
         ${AccountKey},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -62,6 +65,7 @@ function New-CryptEncryptionToken {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AccountKey},
             ${SessionId},
             ${SessionType},

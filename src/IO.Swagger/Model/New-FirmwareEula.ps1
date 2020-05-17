@@ -29,6 +29,9 @@ function New-FirmwareEula {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Accepted},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,6 +56,7 @@ function New-FirmwareEula {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Accepted},
             ${Account},
             ${Content}

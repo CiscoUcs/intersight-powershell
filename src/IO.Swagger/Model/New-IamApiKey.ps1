@@ -29,6 +29,12 @@ function New-IamApiKey {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.IamPermissionRef]]
+        ${Permission},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${PrivateKey},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,6 +59,8 @@ function New-IamApiKey {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
+            ${Permission},
             ${PrivateKey},
             ${Purpose},
             ${User}

@@ -29,6 +29,9 @@ function New-HyperflexAlarm {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${Acknowledged},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -71,6 +74,7 @@ function New-HyperflexAlarm {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Acknowledged},
             ${Cluster},
             ${Description},

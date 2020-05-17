@@ -29,6 +29,9 @@ function New-IaasConnectorPack {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[String[]]]
         ${DependencyNames},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -62,6 +65,7 @@ function New-IaasConnectorPack {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DependencyNames},
             ${DownloadedVersion},
             ${Guid},

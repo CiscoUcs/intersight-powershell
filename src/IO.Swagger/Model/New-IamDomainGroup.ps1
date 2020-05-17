@@ -29,6 +29,9 @@ function New-IamDomainGroup {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -65,6 +68,7 @@ function New-IamDomainGroup {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Account},
             ${Name},
             ${Partition1},

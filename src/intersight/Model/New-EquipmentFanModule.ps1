@@ -29,6 +29,9 @@ function New-EquipmentFanModule {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${DeviceMoId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -55,6 +58,9 @@ function New-EquipmentFanModule {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.EquipmentChassisRef]]
         ${EquipmentChassis},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.EquipmentRackEnclosureRef]]
+        ${EquipmentRackEnclosure},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.EquipmentFanRef[]]]
         ${Fans},
@@ -86,6 +92,7 @@ function New-EquipmentFanModule {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceMoId},
             ${Dn},
             ${Rn},
@@ -95,6 +102,7 @@ function New-EquipmentFanModule {
             ${Vendor},
             ${ComputeRackUnit},
             ${EquipmentChassis},
+            ${EquipmentRackEnclosure},
             ${Fans},
             ${NetworkElement},
             ${OperState},

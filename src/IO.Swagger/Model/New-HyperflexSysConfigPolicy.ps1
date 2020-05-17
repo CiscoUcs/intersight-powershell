@@ -29,6 +29,9 @@ function New-HyperflexSysConfigPolicy {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -37,6 +40,9 @@ function New-HyperflexSysConfigPolicy {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.HyperflexClusterProfileRef[]]]
         ${ClusterProfiles},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${DnsDomainName},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[String[]]]
         ${DnsServers},
@@ -65,9 +71,11 @@ function New-HyperflexSysConfigPolicy {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name},
             ${ClusterProfiles},
+            ${DnsDomainName},
             ${DnsServers},
             ${NtpServers},
             ${Organization},

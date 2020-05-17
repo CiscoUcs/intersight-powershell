@@ -29,6 +29,9 @@ function New-WorkflowTaskInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Descr},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -43,6 +46,9 @@ function New-WorkflowTaskInfo {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${InstId},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[Boolean]]
+        ${Internal},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
@@ -83,11 +89,13 @@ function New-WorkflowTaskInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Descr},
             ${EndTime},
             ${FailureReason},
             ${Input},
             ${InstId},
+            ${Internal},
             ${Name},
             ${Output},
             ${RefName},

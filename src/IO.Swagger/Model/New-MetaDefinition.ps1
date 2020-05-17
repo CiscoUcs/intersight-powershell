@@ -29,11 +29,11 @@ function New-MetaDefinition {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[String[]]]
         ${AncestorClasses},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${ExternalType},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${IsConcrete},
@@ -43,9 +43,6 @@ function New-MetaDefinition {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Namespace},
-        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[Boolean]]
-        ${Observe},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${ParentClass},
@@ -77,12 +74,11 @@ function New-MetaDefinition {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AncestorClasses},
-            ${ExternalType},
             ${IsConcrete},
             ${Name},
             ${Namespace},
-            ${Observe},
             ${ParentClass},
             ${Properties},
             ${Relationships},

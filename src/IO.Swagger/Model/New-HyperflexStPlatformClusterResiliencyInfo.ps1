@@ -8,7 +8,7 @@ function New-HyperflexStPlatformClusterResiliencyInfo {
         [System.Nullable[String[]]]
         ${Messages},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[intersight.Model.HyperflexIteratorString]]
+        [System.Nullable[String]]
         ${MessagesIterator},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]

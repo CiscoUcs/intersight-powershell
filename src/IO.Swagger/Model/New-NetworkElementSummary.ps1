@@ -29,6 +29,9 @@ function New-NetworkElementSummary {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AdminInbandInterfaceState},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -137,6 +140,7 @@ function New-NetworkElementSummary {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AdminInbandInterfaceState},
             ${DeviceMoId},
             ${Dn},

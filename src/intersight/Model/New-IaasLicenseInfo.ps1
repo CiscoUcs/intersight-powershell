@@ -29,6 +29,9 @@ function New-IaasLicenseInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IaasUcsdInfoRef]]
         ${Guid},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -59,6 +62,7 @@ function New-IaasLicenseInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Guid},
             ${LicenseExpirationDate},
             ${LicenseKeysInfo},

@@ -29,6 +29,9 @@ function New-IamEndPointUserRole {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${ChangePassword},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -65,6 +68,7 @@ function New-IamEndPointUserRole {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${ChangePassword},
             ${Enabled},
             ${EndPointRole},

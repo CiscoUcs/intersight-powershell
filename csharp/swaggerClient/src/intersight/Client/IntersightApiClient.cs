@@ -8,7 +8,6 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Security;
-using System.Web.Script.Serialization;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using RestSharp;
@@ -410,7 +409,6 @@ namespace intersight.Client
             Dictionary<String, FileParameter> fileParams, Dictionary<String, String> pathParams,
             String contentType)
         {
-
             
             foreach (var x in pathParams)
             {
@@ -419,7 +417,6 @@ namespace intersight.Client
 
             headerParams.Clear();
             prepare_auth_header(path, method, postBody, queryParams);
-            
             headerParams.Add("Content-Type", "application/json");
             headerParams.Add("Accept", "application/json");
 
@@ -437,7 +434,44 @@ namespace intersight.Client
                 string value = x.Value;
             }
              
-            return base.CallApi(path, method, queryParams, postBody, headerParams, formParams, fileParams, pathParams, contentType);
+            Object response = base.CallApi(path, method, queryParams, postBody, headerParams, formParams, fileParams, pathParams, contentType);
+
+            try {
+                IRestResponse localVarResponse = (IRestResponse)response;
+                int localVarStatusCode = (int)localVarResponse.StatusCode;
+                if (localVarStatusCode != 200)
+                {
+                    Console.WriteLine("Status : " + localVarResponse.StatusDescription);
+                    Console.WriteLine("Status Code: " + localVarStatusCode);
+                    foreach (var list in localVarResponse.Headers)
+                    {
+                        string property = list.ToString();
+                        if (property.StartsWith("X-Starship-TraceId"))
+                        {
+                            Console.WriteLine("TraceId : " + property.Split('=')[1]);
+                        }
+                        else if (property.StartsWith("WWW-Authenticate"))
+                        {
+                            string[] fields = property.Split(new string[] { ", " }, StringSplitOptions.None);
+                            foreach (var str in fields)
+                            {
+                                if (str.StartsWith("errorMessageId="))
+                                {
+                                    Console.WriteLine("Error Message ID : " + str.Split('=')[1]);
+                                }
+                                else if (str.StartsWith("errorMessage="))
+                                {
+                                    Console.WriteLine("Error Message : " + str.Split('=')[1]);
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception ex)
+            {
+                Console.WriteLine("Internal error occured while parsing the response : "+ex.ToString());
+            }
+            return response;
         }
 
         public byte[] get_sha256_digest(string data)
@@ -571,8 +605,6 @@ namespace intersight.Client
             Configuration.AddDefaultHeader("Digest", string.Format("SHA-256={0}", Convert.ToBase64String(body_digest)));
             Configuration.AddDefaultHeader("Authorization", string.Format("{0}", (auth_header)));
 
-             
-
             ServicePointManager.ServerCertificateValidationCallback = new
             RemoteCertificateValidationCallback(
                delegate { return true; }
@@ -580,3 +612,5 @@ namespace intersight.Client
         }
     }
 }
+
+

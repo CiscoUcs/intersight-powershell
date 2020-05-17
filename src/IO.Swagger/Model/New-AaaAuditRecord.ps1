@@ -29,6 +29,9 @@ function New-AaaAuditRecord {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Event},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -46,6 +49,9 @@ function New-AaaAuditRecord {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${Email},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${InstId},
@@ -77,12 +83,14 @@ function New-AaaAuditRecord {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Event},
             ${MoType},
             ${ObjectMoid},
             ${Request},
             ${TraceId},
             ${Account},
+            ${Email},
             ${InstId},
             ${Sessions},
             ${SourceIp},

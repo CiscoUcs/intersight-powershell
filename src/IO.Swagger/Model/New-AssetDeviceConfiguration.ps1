@@ -29,6 +29,9 @@ function New-AssetDeviceConfiguration {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.AssetDeviceRegistrationRef]]
         ${Device},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,6 +56,7 @@ function New-AssetDeviceConfiguration {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Device},
             ${LocalConfigurationLocked},
             ${LogLevel}

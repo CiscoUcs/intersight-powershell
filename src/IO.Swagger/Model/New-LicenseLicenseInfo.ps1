@@ -29,6 +29,9 @@ function New-LicenseLicenseInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.LicenseAccountLicenseDataRef]]
         ${AccountLicenseData},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -83,6 +86,7 @@ function New-LicenseLicenseInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AccountLicenseData},
             ${ActiveAdmin},
             ${DaysLeft},

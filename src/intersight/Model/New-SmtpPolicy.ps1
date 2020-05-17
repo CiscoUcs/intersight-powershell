@@ -29,6 +29,9 @@ function New-SmtpPolicy {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -46,6 +49,9 @@ function New-SmtpPolicy {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.PolicyAbstractConfigProfileRef[]]]
         ${Profiles},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${SenderEmail},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]
         ${SmtpPort},
@@ -71,12 +77,14 @@ function New-SmtpPolicy {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name},
             ${Enabled},
             ${MinSeverity},
             ${Organization},
             ${Profiles},
+            ${SenderEmail},
             ${SmtpPort},
             ${SmtpRecipients},
             ${SmtpServer}

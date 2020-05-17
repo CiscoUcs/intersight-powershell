@@ -29,7 +29,10 @@ function New-TerminalAuditLog {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
-        [System.Nullable[intersight.Model.AssetDeviceRegistrationRef]]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.AssetDeviceConnectionRef]]
         ${DeviceRegistration},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[System.DateTime]]
@@ -56,6 +59,7 @@ function New-TerminalAuditLog {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${DeviceRegistration},
             ${EndTime},
             ${StartTime},

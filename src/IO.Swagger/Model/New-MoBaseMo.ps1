@@ -27,7 +27,10 @@ function New-MoBaseMo {
         ${Parent},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.MoTag[]]]
-        ${Tags}
+        ${Tags},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext}
     )
 
     Process {
@@ -43,7 +46,8 @@ function New-MoBaseMo {
             ${ObjectType},
             ${Owners},
             ${Parent},
-            ${Tags}
+            ${Tags},
+            ${VersionContext}
         )
     }
 }

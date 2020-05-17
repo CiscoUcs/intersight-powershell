@@ -29,6 +29,9 @@ function New-AssetDeviceClaim {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -56,6 +59,7 @@ function New-AssetDeviceClaim {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Account},
             ${Device},
             ${SecurityToken},

@@ -29,6 +29,9 @@ function New-CondHclStatus {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.CondHclStatusDetailRef[]]]
         ${Details},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -89,6 +92,7 @@ function New-CondHclStatus {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Details},
             ${HclFirmwareVersion},
             ${HclModel},

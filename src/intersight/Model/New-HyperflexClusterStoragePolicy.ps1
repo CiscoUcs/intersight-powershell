@@ -29,6 +29,9 @@ function New-HyperflexClusterStoragePolicy {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Description},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -40,6 +43,9 @@ function New-HyperflexClusterStoragePolicy {
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Boolean]]
         ${DiskPartitionCleanup},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.HyperflexLogicalAvailabilityZone]]
+        ${LogicalAvalabilityZoneConfig},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Organization},
@@ -62,10 +68,12 @@ function New-HyperflexClusterStoragePolicy {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Description},
             ${Name},
             ${ClusterProfiles},
             ${DiskPartitionCleanup},
+            ${LogicalAvalabilityZoneConfig},
             ${Organization},
             ${VdiOptimization}
         )

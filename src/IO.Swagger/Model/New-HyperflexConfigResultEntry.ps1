@@ -29,6 +29,9 @@ function New-HyperflexConfigResultEntry {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${CompletedTime},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -65,6 +68,7 @@ function New-HyperflexConfigResultEntry {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${CompletedTime},
             ${Context},
             ${Message},

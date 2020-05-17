@@ -29,6 +29,9 @@ function New-FirmwareDistributable {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${BundleType},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -63,6 +66,9 @@ function New-FirmwareDistributable {
         ${Size},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
+        ${SoftwareAdvisoryUrl},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
         ${SoftwareTypeId},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
@@ -92,6 +98,7 @@ function New-FirmwareDistributable {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${BundleType},
             ${Description},
             ${Guid},
@@ -103,6 +110,7 @@ function New-FirmwareDistributable {
             ${PlatformType},
             ${ReleaseDate},
             ${Size},
+            ${SoftwareAdvisoryUrl},
             ${SoftwareTypeId},
             ${Source},
             ${SupportedModels},

@@ -29,6 +29,9 @@ function New-LicenseAccountLicenseData {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamAccountRef]]
         ${Account},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -113,6 +116,7 @@ function New-LicenseAccountLicenseData {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Account},
             ${AccountId},
             ${AgentData},

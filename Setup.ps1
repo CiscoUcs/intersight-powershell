@@ -58,7 +58,7 @@ $Manifest = @{
     Description = 'intersight - the PowerShell module for Intersight REST API'
 
     RootModule = 'intersight.psm1'
-    Guid = '{F9A9EE92-1B6B-42FF-9AD1-6266196CA87C}' # Has to be static, otherwise each new build will be considered different module
+    Guid = '{395C7E6B-2A4E-48D7-B790-26D7601B038B}' # Has to be static, otherwise each new build will be considered different module
 
     PowerShellVersion = '3.0'
 

@@ -29,6 +29,9 @@ function New-IaasDeviceStatus {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AccountName},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -54,7 +57,10 @@ function New-IaasDeviceStatus {
         ${IpAddress},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
-        ${Pod}
+        ${Pod},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
+        ${PodType}
     )
 
     Process {
@@ -71,6 +77,7 @@ function New-IaasDeviceStatus {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AccountName},
             ${AccountType},
             ${ConnectionStatus},
@@ -79,7 +86,8 @@ function New-IaasDeviceStatus {
             ${DeviceVersion},
             ${Guid},
             ${IpAddress},
-            ${Pod}
+            ${Pod},
+            ${PodType}
         )
     }
 }

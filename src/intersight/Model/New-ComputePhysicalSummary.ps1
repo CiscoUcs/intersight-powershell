@@ -29,6 +29,9 @@ function New-ComputePhysicalSummary {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${AdminPowerState},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -120,6 +123,9 @@ function New-ComputePhysicalSummary {
         ${Rn},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
+        ${ScaledMode},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [String]
         ${Serial},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[Int64]]
@@ -161,6 +167,7 @@ function New-ComputePhysicalSummary {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${AdminPowerState},
             ${AssetTag},
             ${AvailableMemory},
@@ -191,6 +198,7 @@ function New-ComputePhysicalSummary {
             ${RegisteredDevice},
             ${Revision},
             ${Rn},
+            ${ScaledMode},
             ${Serial},
             ${ServerId},
             ${ServiceProfile},

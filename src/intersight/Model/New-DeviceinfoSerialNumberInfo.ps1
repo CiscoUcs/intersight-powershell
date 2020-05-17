@@ -29,6 +29,9 @@ function New-DeviceinfoSerialNumberInfo {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${CoveredProductLineEndDate},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -89,6 +92,7 @@ function New-DeviceinfoSerialNumberInfo {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${CoveredProductLineEndDate},
             ${CustomerAddress},
             ${CustomerCity},

@@ -29,6 +29,9 @@ function New-IamLdapProvider {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [System.Nullable[intersight.Model.IamLdapPolicyRef]]
         ${LdapPolicy},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,6 +56,7 @@ function New-IamLdapProvider {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${LdapPolicy},
             ${Port},
             ${Server}

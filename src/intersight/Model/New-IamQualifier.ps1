@@ -29,6 +29,9 @@ function New-IamQualifier {
         [System.Nullable[intersight.Model.MoTag[]]]
         ${Tags},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
+        [System.Nullable[intersight.Model.MoVersionContext]]
+        ${VersionContext},
+        [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
         [String]
         ${Name},
         [Parameter(Position = 0, ValueFromPipelineByPropertyName = $true)]
@@ -53,6 +56,7 @@ function New-IamQualifier {
             ${Owners},
             ${Parent},
             ${Tags},
+            ${VersionContext},
             ${Name},
             ${Usergroup},
             ${Value}
