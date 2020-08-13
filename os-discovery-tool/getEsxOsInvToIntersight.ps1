@@ -202,6 +202,7 @@ Function GetDriverDetails {
 
     $niclist = $esxcli.network.nic.list.Invoke()
     $hbalist = $esxcli.storage.core.adapter.list.Invoke()
+    $gpulist = $esxcli.graphics.device.list.Invoke()
 
     foreach($nic in $niclist) {
         if(!$driverList.Contains($nic.Driver)) {
@@ -258,6 +259,74 @@ Function GetDriverDetails {
             $devcount = $devcount + 1
         }
     }
+
+    foreach($gpu in $gpulist) {
+        if(!$driverList.Contains($gpu.ModuleName)){
+            # If Nvidia GPU is in Passthrough mode, don't report any driver
+            # Check if GPU is in Non-Passthrough mode
+            # GraphicsType is SharedPassthru, vGPU mode is enabled
+            if(($gpu.GraphicsType -eq "SharedPassthru")){
+                $driverList.Add($gpu.ModuleName)
+                Write-Host "GPU detected in Non-Passthrough mode and vGPU enabled. Driver name: " $gpu.ModuleName
+                $key = $prefix+"os.driver."+$devcount+".name"
+                $osInv = New-Object System.Object
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $osInv | Add-Member -type NoteProperty -name Value -Value ($gpu.ModuleName+"(graphics)")
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $osInv = New-Object System.Object
+                $key = $prefix+"os.driver."+$devcount+".version"
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $driverVersion = $esxcli.system.module.get.Invoke(@{module=$gpu.ModuleName}).Version
+                if($driverversion -like "Version*") {
+                    $driverVersion = $driverversion.split(",")[0].split(" ")[1]
+                }
+                $osInv | Add-Member -type NoteProperty -name Value -Value $driverVersion
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $osInv = New-Object System.Object
+                $key = $prefix+"os.driver."+$devcount+".description"
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $osInv | Add-Member -type NoteProperty -name Value -Value $gpu.DeviceName
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $devcount = $devcount + 1
+            }
+
+            # GraphicsType is Shared, so vGPU mode is not enabled, report empty driver version
+            elseif(($gpu.GraphicsType -eq "Shared")){
+                $driverList.Add($gpu.ModuleName)
+                Write-Host "GPU detected in Non-Passthrough mode and vGPU not enabled. Driver name: " $gpu.ModuleName
+                $key = $prefix+"os.driver."+$devcount+".name"
+                $osInv = New-Object System.Object
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $osInv | Add-Member -type NoteProperty -name Value -Value ($gpu.ModuleName+"(graphics)")
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $osInv = New-Object System.Object
+                $key = $prefix+"os.driver."+$devcount+".version"
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $driverVersion = ''
+                $osInv | Add-Member -type NoteProperty -name Value -Value $driverVersion
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $osInv = New-Object System.Object
+                $key = $prefix+"os.driver."+$devcount+".description"
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $osInv | Add-Member -type NoteProperty -name Value -Value $gpu.DeviceName
+                $count = $osInvCollection.Add($osInv)
+                Clear-Variable -Name osInv
+
+                $devcount = $devcount + 1
+            }
+        }
+    }
+
     Return $OsInvCollection
 }
 
