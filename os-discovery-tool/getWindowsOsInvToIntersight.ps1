@@ -54,14 +54,14 @@ Add-type @"
 
 $storage_device_map = @{
     "MEGARAID_BLADE" = "RAID";
-    "SWRAID" = "RAID";
-    "MEGARAID_RACK" = "SAS RAID";
-	"AHCI" = "ahci";
-	"Modular Raid" = "SAS RAID";
-	"SAS HBA" = "SAS HBA";
-	"NVMe" = "Flash";
-	"LOM" = "LOM";
-    "Inter(R) i350" = "LOM";
+    "SWRAID"         = "RAID";
+    "MEGARAID_RACK"  = "SAS RAID";
+    "AHCI"           = "ahci";
+    "Modular Raid"   = "SAS RAID";
+    "SAS HBA"        = "SAS HBA";
+    "NVMe"           = "Flash";
+    "LOM"            = "LOM";
+    "Inter(R) i350"  = "LOM";
 }
     
 
@@ -207,10 +207,11 @@ Function GetDriverDetails {
                         $_.Devicename -like "*Ethernet*" -or
                         $_.Devicename -like "*FCoE*" -or
                         $_.Devicename -like "*LOM*" -or
-                        $_.Devicename -like "*Intel(R) i350*"
+                        $_.Devicename -like "*Intel(R) i350*" -or
                         $_.Devicename -like "*Nvidia*"
-                    }
+                      }
     $devcount = 0
+
     foreach ($netdev in $netDevList) {
        
         
@@ -251,7 +252,43 @@ Function GetDriverDetails {
         }
         elseif($netdev.DeviceName -like "*Nvidia*")
         {
-            $osInv | Add-Member -type NoteProperty -name Value -Value "GPU"
+            Write-host "[$hostname]: NVIDIA GPU Detected, retrieving GPU inventory..."
+
+            # Nvidia-smi will be installed either under 'Program Files' folder or the 'System32' folder in C drive
+            $nvidiasmi =  Invoke-Command -ComputerName $hostname -ScriptBlock{Get-ChildItem -Path 'C:\Program Files\', 'C:\Windows\System32\DriverStore\' -Recurse -Include nvidia-smi.exe}
+
+            if($nvidiasmi)
+            {
+                foreach($cmd in $nvidiasmi)
+                {
+                    # Determine if Graphics driver or compute driver is installed
+                    $command = "'$cmd' --query-gpu=driver_model.current --format=csv,no header"
+                    $mode = Invoke-Command -ComputerName $hostname -ScriptBlock ([ScriptBlock]::Create("& $command"))
+
+                    if($mode -contains "WDDM")
+                    {
+                        Write-host "[$hostname]: NVIDIA Graphics Driver is installed"
+                        $osInv | Add-Member -type NoteProperty -name Value -Value "nvidia(graphics)"
+                    }
+                    elseif($mode -contains "TCC")
+                    {
+                        Write-host "[$hostname]: NVIDIA Compute Driver is installed"
+                        $osInv | Add-Member -type NoteProperty -name Value -Value "nvidia(compute)"
+                    }
+                    else
+                    {
+                        Write-Host -ForegroundColor Yellow "[$hostname]: NVIDIA GPU mode is unidentified. Skipping adding the driver information."
+                    }
+
+                    # avoid traversing multiple paths of nvidia-smi.exe
+                    break
+                }
+            }
+            else
+            {
+                Write-Host -ForegroundColor Yellow "[$hostname]: No NVIDIA GPU driver found"
+            }
+
         }
         else
         {
@@ -269,8 +306,24 @@ Function GetDriverDetails {
             Clear-Variable -Name osInv
             $osInv = New-Object System.Object
             $key = $prefix+"os.driver."+$devcount+".version"
-            $osInv | Add-Member -type NoteProperty -name Key -Value $key
-            $osInv | Add-Member -type NoteProperty -name Value -Value $netdev.DriverVersion
+
+            # Nvidia GPU driver version needs special reformatting
+            if($netdev.DeviceName -like "*Nvidia*")
+            {
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+
+                # Last five digits in DriverVersion value is the actual Nvidia GPU Driver Version
+                $nvidiaDriverVersion = $netdev.DriverVersion -replace '\.', ''
+                $nvidiaDriverVersion = $nvidiaDriverVersion.Substring($nvidiaDriverVersion.Length - 5).Insert(3,".")
+
+                $osInv | Add-Member -type NoteProperty -name Value -Value $nvidiaDriverVersion
+            }
+            else
+            {
+                $osInv | Add-Member -type NoteProperty -name Key -Value $key
+                $osInv | Add-Member -type NoteProperty -name Value -Value $netdev.DriverVersion
+            }
+
             $count = $osInvCollection.Add($osInv)
             $devcount = $devcount + 1
         }
@@ -298,9 +351,9 @@ Function GetDriverDetails {
         $osInv = New-Object System.Object
         $osInv | Add-Member -type NoteProperty -name Key -Value $key
         if(($storageController.DeviceName -like "*LSI*" -and 
-           $storageController.DeviceName -like "*Mega*") -or
-           $storageController.DeviceName -like "*SAS RAID*" -or
-           $storageController.DeviceName -like "*RAID SAS*") 
+            $storageController.DeviceName -like "*Mega*") -or
+            $storageController.DeviceName -like "*SAS RAID*" -or
+            $storageController.DeviceName -like "*RAID SAS*")
         {
             $computeType = GetComputeType $hostname
             
@@ -603,7 +656,7 @@ Function DoDiscovery {
             Write-Host -ForegroundColor Yellow "No results for {$VMHost}:$sever_serial from intersight, skipping..."
             WriteLog $env "WARNING" "No results for {$VMHost}:$sever_serial from intersight"
         }
-                Write-Host -ForegroundColor Green "Processing {$hostname} :"$server_serial" complete."
+        Write-Host -ForegroundColor Green "Processing {$hostname} :"$server_serial" complete."
         Write-Host -ForegroundColor Green "===================================================================================="
     }
     WriteLog $env "INFO" "ODT Discovery complete!"
