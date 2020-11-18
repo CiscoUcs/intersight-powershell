@@ -53,9 +53,8 @@ Add-type @"
 [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
 
 $storage_device_map = @{
-    "MEGARAID_BLADE" = "RAID";
     "SWRAID"         = "RAID";
-    "MEGARAID_RACK"  = "SAS RAID";
+    "MEGARAID"       = "SAS RAID";
     "AHCI"           = "ahci";
     "Modular Raid"   = "SAS RAID";
     "SAS HBA"        = "SAS HBA";
@@ -244,11 +243,11 @@ Function GetDriverDetails {
         }
         elseif($netdev.DeviceName -like "*LOM*")
         {
-            $osInv | Add-Member -type NoteProperty -name Value -Value "LOM"
+            $osInv | Add-Member -type NoteProperty -name Value -Value "Ethernet"
         }
         elseif($netdev.DeviceName -like "*Intel(R) i350*")
         {
-            $osInv | Add-Member -type NoteProperty -name Value -Value "LOM"
+            $osInv | Add-Member -type NoteProperty -name Value -Value "Ethernet"
         }
         elseif($netdev.DeviceName -like "*Nvidia*")
         {
@@ -355,17 +354,7 @@ Function GetDriverDetails {
             $storageController.DeviceName -like "*SAS RAID*" -or
             $storageController.DeviceName -like "*RAID SAS*")
         {
-            $computeType = GetComputeType $hostname
-            
-            if($computeType -eq "blade") 
-            {
-                $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["MEGARAID_BLADE"]
-            }
-            elseif($computeType -eq "rack")
-            {
-                $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["MEGARAID_RACK"]
-            }
-
+            $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["MEGARAID"]
         }
         elseif($storageController.DeviceName -like "*AHCI*")
         {
