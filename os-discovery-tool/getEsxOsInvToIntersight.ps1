@@ -112,7 +112,9 @@ Function GetVMHostSerial {
 Function GetComputeType {
     Param([object]$esxcli)
     $model = ($esxcli.hardware.platform.get.Invoke() | select ProductName).ProductName
-    if($model -like "*UCSB*") {
+    # colusa servers PID are UCSC-C3K-M4SRB and UCS-S3260-M5 for M4 and M5 servers respectively
+    # colusa is stored as compute.blade mo on intersight, so return blade compute type
+    if($model -like "*UCSB*" -or $model -like "UCS-S3260*" -or $model -like "UCSC-C3K*") {
         Return "blade"
     }
     else {

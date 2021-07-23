@@ -102,7 +102,9 @@ Function GetWindowHostSerial {
 Function GetComputeType {
     Param([object]$hostname)
     $model = (Get-WmiObject Win32_Computersystem -Computer $hostname | select Model).Model
-    if($model -like "*UCSB*") {
+    # colusa servers PID are UCSC-C3K-M4SRB and UCS-S3260-M5 for M4 and M5 servers respectively
+    # colusa is stored as compute.blade mo on intersight, so return blade compute type
+    if($model -like "*UCSB*" -or $model -like "UCS-S3260*" -or $model -like "UCSC-C3K*") {
         Return "blade"
     }
     else {
@@ -339,7 +341,9 @@ Function GetDriverDetails {
                                     $_.devicename -like "*Modular Raid*" -or 
                                     $_.devicename -like "*NVMe*" -or
                                     $_.devicename -like "*LOM*" -or
-                                    $_.devicename -like "*SAS HBA*"
+                                    $_.devicename -like "*SAS HBA*" -or
+                                    $_.devicename -like "*S3260 Dual Raid*" -or
+                                    $_.devicename -like "*S3260 Dual Pass Through*"
                                 }
     foreach ($storageController in $storageControllerList) {
         $stdrivername = (get-wmiobject -class "Win32_SCSIController" -namespace "root\CIMV2" -ComputerName $hostname) | select Name, DriverName | 
@@ -360,11 +364,13 @@ Function GetDriverDetails {
         {
             $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["AHCI"]
         }
-        elseif($storageController.DeviceName -like "*Modular Raid*") 
+        elseif(($storageController.DeviceName -like "*Modular Raid*") -or
+               ($storageController.DeviceName -like "*S3260 Dual Raid*"))
         {
             $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["Modular Raid"]
         }
-        elseif($storageController.DeviceName -like "*SAS HBA*")
+        elseif(($storageController.DeviceName -like "*SAS HBA*") -or
+               ($storageController.DeviceName -like "*S3260 Dual Pass Through*"))
         {
             $osInv | Add-Member -type NoteProperty -name Value -Value $storage_device_map["SAS HBA"]
         }
